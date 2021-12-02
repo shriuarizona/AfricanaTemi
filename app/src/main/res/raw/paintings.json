@@ -1,0 +1,42 @@
+[
+  {
+    "location": "painting00",
+    "artistId": 0
+  },
+  {
+    "location": "painting01",
+    "artistId": 1
+  },
+  {
+    "location": "painting02",
+    "artistId": 2
+  },
+  {
+    "location": "painting03",
+    "artistId": 3
+  },
+  {
+    "location": "painting04",
+    "artistId": 4
+  },
+  {
+    "location": "painting05",
+    "artistId": 5
+  },
+  {
+    "location": "painting06",
+    "artistId": 6
+  },
+  {
+    "location": "painting07",
+    "artistId": 7
+  },
+  {
+    "location": "painting08",
+    "artistId": 0
+  },
+  {
+    "location": "painting09",
+    "artistId": 8
+  }
+]
