@@ -69,7 +69,7 @@ public class TourActivity extends AppCompatActivity {
     /**
      * Loads the artist and painting data
      */
-    public void loadData() throws Painting.InvalidArtistException {
+    private void loadData() throws Painting.InvalidArtistException {
         if (paintings != null) {
             // Data is already loaded
             return;

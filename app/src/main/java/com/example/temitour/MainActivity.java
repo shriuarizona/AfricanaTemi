@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Opens the tour activity
      */
-    public void openTourActivity() {
+    private void openTourActivity() {
         Intent intent = new Intent(this, TourActivity.class);
         startActivity(intent);
     }
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Opens the survey activity
      */
-    public void openSurveyActivity() {
+    private void openSurveyActivity() {
         Intent intent = new Intent(this, SurveyActivity.class);
         startActivity(intent);
     }
