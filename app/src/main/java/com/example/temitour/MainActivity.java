@@ -7,8 +7,9 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.robotemi.sdk.Robot;
+import com.robotemi.sdk.listeners.OnRobotReadyListener;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnRobotReadyListener {
 
     private Button tourButton;
     private Button surveyButton;
@@ -37,11 +38,24 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         // NOTE: This is where various listeners can be set up for Temi
-        // once the app starts. Any listeners must be removed by overriding
-        // the onStop() method.
+        // once the app starts. Any listeners must be removed in the onStop() method
+        Robot.getInstance().addOnRobotReadyListener(this);
+    }
 
-        // Hide the top bar (can be re-opened by swiping down from top of screen)
-        Robot.getInstance().hideTopBar();
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        // Remove listeners
+        Robot.getInstance().removeOnRobotReadyListener(this);
+    }
+
+    @Override
+    public void onRobotReady(boolean isReady) {
+        if (isReady) {
+            // Hide the top bar (can be re-opened by swiping down from top of screen)
+            Robot.getInstance().hideTopBar();
+        }
     }
 
     /**
