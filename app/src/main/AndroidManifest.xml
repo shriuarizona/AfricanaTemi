@@ -15,7 +15,7 @@
             android:value="@string/app_name" />
 
         <activity
-            android:name="com.example.temitour.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,11 +23,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.example.temitour.TourActivity"
-            android:parentActivityName="com.example.temitour.MainActivity" />
+        <activity android:name=".TourActivity"
+            android:parentActivityName=".MainActivity" />
 
-        <activity android:name="com.example.temitour.SurveyActivity"
-            android:parentActivityName="com.example.temitour.MainActivity" />
+        <activity android:name=".SurveyActivity"
+            android:parentActivityName=".MainActivity" />
 
     </application>
 
