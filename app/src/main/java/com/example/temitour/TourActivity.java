@@ -1,9 +1,12 @@
 package com.example.temitour;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TableLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,17 +14,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class TourActivity extends AppCompatActivity {
 
-    private Button cancelButton;
-    private Button beginButton;
-    private static Painting[] paintings = null;
+    private Painting[] paintings = null;
+    private ImageView paintingImage;
+    private TextView artistTextView;
+    private TextView yearTextView;
+    private TextView mediumTextView;
+    private TextView measurementsTextView;
+    private TextView descriptionTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +34,12 @@ public class TourActivity extends AppCompatActivity {
 
         setTitle(R.string.tour_title);
         setContentView(R.layout.activity_tour);
+        paintingImage = findViewById(R.id.painting_image);
+        artistTextView = findViewById(R.id.artist_text);
+        yearTextView = findViewById(R.id.year_text);
+        mediumTextView = findViewById(R.id.medium_text);
+        measurementsTextView = findViewById(R.id.measurements_text);
+        descriptionTextView = findViewById(R.id.description_text);
 
         // Try to load the paintings and artists
         try {
@@ -42,16 +53,8 @@ public class TourActivity extends AppCompatActivity {
             toast.show();
         }
 
-        // Cancel button
-        cancelButton = findViewById(R.id.cancelTourButton);
-        cancelButton.setOnClickListener((l) -> finish());
-
-        // Continue button
-        beginButton = findViewById(R.id.beginTourButton);
-        beginButton.setOnClickListener((l) -> {
-            beginTour();
-        });
-
+        // Give the tour
+        beginTour();
     }
 
     /**
@@ -63,7 +66,20 @@ public class TourActivity extends AppCompatActivity {
         toast.show();
 
         // TODO: actually do the tour
-        finish();
+        for (Painting p : paintings) {
+            displayPaintingInfo(p);
+        }
+    }
+
+    private void displayPaintingInfo(Painting painting) {
+        // Update the painting info displayed
+        // TODO: update the image
+        // paintingImage.setImage
+        artistTextView.setText(painting.getArtist().getName());
+        yearTextView.setText(painting.getYear());
+        mediumTextView.setText(painting.getMedium());
+        measurementsTextView.setText(painting.getMeasurements());
+        descriptionTextView.setText(painting.getDescription());
     }
 
     /**
@@ -92,5 +108,7 @@ public class TourActivity extends AppCompatActivity {
             p.setArtist(map.get(p.getArtistId()));
         }
     }
+
+
 
 }

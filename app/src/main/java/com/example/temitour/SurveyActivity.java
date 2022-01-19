@@ -130,8 +130,6 @@ public class SurveyActivity extends AppCompatActivity {
         // Replace whatever is in the fragment_container view with this fragment
         SurveyFragment.setFragmentId(questionFragmentIds[questionNum - 1]);
         transaction.replace(R.id.survey_fragment_container, SurveyFragment.class, null);
-
-        // Commit the transaction
         transaction.commit();
     }
 

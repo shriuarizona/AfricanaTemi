@@ -10,10 +10,19 @@ public class Painting {
     private Artist artist;
     private String location;
     private int artistId;
+    private String year;
+    private String medium;
+    private String measurements;
+    private String description;
 
-    public Painting(String location, int artistId) {
+    public Painting(String location, int artistId, String year, String medium, String measurements,
+                    String description) {
         this.location = location;
         this.artistId = artistId;
+        this.year = year;
+        this.medium = medium;
+        this.measurements = measurements;
+        this.description = description;
     }
 
     /**
@@ -22,6 +31,38 @@ public class Painting {
      */
     public Artist getArtist() {
         return artist;
+    }
+
+    /**
+     * Getter for the string describing when the painting was created
+     * @return year string
+     */
+    public String getYear() {
+        return year;
+    }
+
+    /**
+     * Getter for the string describing the medium of the painting
+     * @return medium string
+     */
+    public String getMedium() {
+        return medium;
+    }
+
+    /**
+     * Getter for the string describing the measurements of the painting
+     * @return measurements string
+     */
+    public String getMeasurements() {
+        return measurements;
+    }
+
+    /**
+     * Getter for the string describing the painting
+     * @return description string
+     */
+    public String getDescription() {
+        return description;
     }
 
     /**

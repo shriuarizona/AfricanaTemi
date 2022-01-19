@@ -31,6 +31,13 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
                openSurveyActivity();
             }
         );
+
+        // TODO: delete the example button
+        Button exampleButton = findViewById(R.id.exampleButton);
+        exampleButton.setOnClickListener((v) -> {
+            Intent intent = new Intent(this, ExampleActivity.class);
+            startActivity(intent);
+        });
     }
 
     @Override

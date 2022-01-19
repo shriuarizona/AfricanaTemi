@@ -3,68 +3,128 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/sample_gradient">
 
-    <TextView
-        android:id="@+id/survey_info_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/tour_info"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:id="@+id/painting_image"
+        android:layout_width="487dp"
+        android:layout_height="595dp"
+        android:layout_marginTop="124dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/example_painting" />
 
-    <Button
-        android:id="@+id/cancelTourButton"
+    <TableLayout
+        android:id="@+id/painting_info_table"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="120dp"
-        android:text="@string/cancel"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/survey_info_text" />
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toEndOf="@+id/painting_image"
+        app:layout_constraintTop_toTopOf="@+id/painting_image">
 
-    <Button
-        android:id="@+id/beginTourButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/begin"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/survey_info_text" />
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:paddingStart="6dp">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+            <TextView
+                android:text="Artist"
+                style="@style/painting_info_key" />
+
+            <TextView
+                android:id="@+id/artist_text"
+                style="@style/painting_info_value"
+                android:text="Charles Alston" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:paddingStart="6dp">
+
+            <TextView
+                android:text="Year"
+                style="@style/painting_info_key" />
+
+            <TextView
+                android:id="@+id/year_text"
+                style="@style/painting_info_value"
+                android:text="Circa 1950" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:paddingStart="6dp">
+
+            <TextView
+                android:text="Medium"
+                style="@style/painting_info_key" />
+
+            <TextView
+                android:id="@+id/medium_text"
+                style="@style/painting_info_value"
+                android:text="Oil on canvas" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:paddingStart="6dp">
+
+            <TextView
+                android:text="Measurements"
+                style="@style/painting_info_key" />
+
+            <TextView
+                android:id="@+id/measurements_text"
+                style="@style/painting_info_value"
+                android:text='30" x 24"' />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:paddingStart="6dp">
+
+            <TextView
+                android:text="Description"
+                style="@style/painting_info_key" />
+
+            <TextView
+                android:id="@+id/description_text"
+                style="@style/painting_info_value"
+                android:text="New York City's lower Manhattan nocturnal skyline" />
+        </TableRow>
+
+    </TableLayout>
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/survey_info_text"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:scaleType="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/art_gallery_qr_code" />
 
     <TextView
+        android:id="@+id/textView9"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Scan each painting as you follow along for additional information!"
+        android:text="Interactive AR experience"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/survey_info_text"
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

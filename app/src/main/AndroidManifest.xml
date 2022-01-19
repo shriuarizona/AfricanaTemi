@@ -29,6 +29,9 @@
         <activity android:name=".SurveyActivity"
             android:parentActivityName=".MainActivity" />
 
+        <activity android:name=".ExampleActivity"
+            android:parentActivityName=".MainActivity" />
+
     </application>
 
 </manifest>
