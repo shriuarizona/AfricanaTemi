@@ -1,6 +1,10 @@
 package com.example.temitour;
 
+import android.graphics.drawable.Drawable;
+
 import com.google.gson.Gson;
+
+import java.lang.reflect.Field;
 
 /**
  * This enum contains information about each painting in the art gallery
@@ -84,6 +88,19 @@ public class Painting {
      */
     public String getLocation() {
         return location;
+    }
+
+    /**
+     * Getter for the resource ID of the image drawable for this painting
+     * @return drawable painting image ID
+     */
+    public int getImageId() {
+        try {
+            Field field = R.drawable.class.getDeclaredField(location);
+            return field.getInt(field);
+        } catch (Exception e) {
+            throw new RuntimeException("Painting image resource not found for " + location);
+        }
     }
 
     /**

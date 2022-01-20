@@ -1,18 +1,22 @@
 package com.example.temitour;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
+import com.robotemi.sdk.Robot;
 
 import java.io.InputStreamReader;
 import java.util.HashMap;
@@ -27,6 +31,7 @@ public class TourActivity extends AppCompatActivity {
     private TextView mediumTextView;
     private TextView measurementsTextView;
     private TextView descriptionTextView;
+    private Button continueButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,7 @@ public class TourActivity extends AppCompatActivity {
         mediumTextView = findViewById(R.id.medium_text);
         measurementsTextView = findViewById(R.id.measurements_text);
         descriptionTextView = findViewById(R.id.description_text);
+        continueButton = findViewById(R.id.continueButton);
 
         // Try to load the paintings and artists
         try {
@@ -64,17 +70,70 @@ public class TourActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(getApplicationContext(), "Beginning tour",
                 Toast.LENGTH_SHORT);
         toast.show();
+        guideToPainting(0);
+    }
 
-        // TODO: actually do the tour
-        for (Painting p : paintings) {
-            displayPaintingInfo(p);
+    /**
+     * Guides the user to the painting
+     * @param i is the index of the painting in the array of Paintings
+     */
+    private void guideToPainting(int i) {
+        // Take them to the painting
+        if (i < paintings.length) {
+            // Update the painting shown
+            Painting painting = paintings[i];
+            updatePaintingInfo(painting);
+
+            // Update the Continue button
+            if (i + 1 < paintings.length) {
+                // Still other paintings left to go
+                continueButton.setText(R.string.continue_tour);
+                continueButton.setOnClickListener((v) -> {
+                    guideToPainting(i + 1);
+                });
+            } else {
+                continueButton.setText(R.string.finish_tour);
+                continueButton.setOnClickListener((v) -> {
+                    // ALertDialog builder to ask if they want to take survey or skip
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Rate your experience");
+                    TextView tv = new TextView(this);
+                    tv.setText("Help us improve your experience by taking a short survey");
+                    builder.setView(tv);
+                    builder.setPositiveButton("Take Survey", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // TODO: check if this opens the survey activity properly
+                            // TODO: make sure that the TourActivity is also closed after they complete the SurveyActivity
+                            Intent intent = new Intent(getApplicationContext(), SurveyActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                    builder.setNegativeButton("No Thanks", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                            finish();
+                        }
+                    });
+                });
+            }
+
+            // Take the user to the painting
+            Robot.getInstance().goTo(painting.getLocation());
         }
     }
 
-    private void displayPaintingInfo(Painting painting) {
+    private void updatePaintingInfo(Painting painting) {
+        // Update the painting image
+        try {
+            Drawable d = getResources().getDrawable(painting.getImageId());
+            paintingImage.setImageDrawable(d);
+        } catch (Exception e) {
+            Log.e("abcdefg", e.getMessage());
+        }
+
         // Update the painting info displayed
-        // TODO: update the image
-        // paintingImage.setImage
         artistTextView.setText(painting.getArtist().getName());
         yearTextView.setText(painting.getYear());
         mediumTextView.setText(painting.getMedium());

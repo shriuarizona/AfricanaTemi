@@ -7,6 +7,8 @@
     <string name="back">Back</string>
     <string name="next">Next</string>
     <string name="submit">Submit</string>
+    <string name="continue_tour">Continue</string>
+    <string name="finish_tour">Finish</string>
     <string name="tour_title">Culture Walk</string>
     <string name="survey_title">"Tour Survey"</string>
     <string name="survey_submitted">Survey response submitted</string>
