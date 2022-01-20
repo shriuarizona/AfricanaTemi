@@ -116,6 +116,7 @@ public class TourActivity extends AppCompatActivity {
                             finish();
                         }
                     });
+                    builder.show();
                 });
             }
 
