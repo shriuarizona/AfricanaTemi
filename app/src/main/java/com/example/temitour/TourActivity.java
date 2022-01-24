@@ -122,6 +122,7 @@ public class TourActivity extends AppCompatActivity {
 
             // Take the user to the painting
             Robot.getInstance().goTo(painting.getLocation());
+            // TODO: use TTS to have robot speak about the painting
         }
     }
 
