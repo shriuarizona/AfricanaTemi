@@ -2,6 +2,8 @@
     <string name="app_name">Temi Tour</string>
     <string name="tour">Tour</string>
     <string name="survey">Survey</string>
+    <string name="culture_walk">Culture Walk</string>
+    <string name="presented_by">Presented by the Center for Digital Humanities</string>
     <string name="cancel">Cancel</string>
     <string name="begin">Begin</string>
     <string name="back">Back</string>
@@ -12,6 +14,7 @@
     <string name="medium">Medium:</string>
     <string name="measurements">Measurements:</string>
     <string name="description">Description:</string>
+    <string name="scan_qr">Scan for interactive AR experience</string>
     <string name="rate_experience">Rate your experience</string>
     <string name="rate_experience_message">"Help us improve your experience by taking a short survey"</string>
     <string name="continue_tour">Continue</string>

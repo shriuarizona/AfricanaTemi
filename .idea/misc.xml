@@ -5,7 +5,9 @@
       <map>
         <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/activity_tour.xml" value="0.134765625" />
-        <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/activity_tour_intro.xml" value="0.1" />
+        <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/activity_tour_intro.xml" value="0.12" />
+        <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/crossfade_layout.xml" value="0.134765625" />
+        <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/tour_start_layout.xml" value="0.134765625" />
       </map>
     </option>
   </component>

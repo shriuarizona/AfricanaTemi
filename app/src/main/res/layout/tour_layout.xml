@@ -127,10 +127,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="5dp"
-        android:text="Scan for interactive AR experience"
+        android:maxWidth="180dp"
+        android:text="@string/scan_qr"
         android:textColor="@color/white"
         android:textSize="20sp"
-        android:maxWidth="180dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent" />
 

@@ -3,12 +3,14 @@ package com.example.temitour;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Parcel;
+import android.os.Handler;
 import android.util.Log;
-import android.view.ViewGroup;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,24 +27,39 @@ import com.robotemi.sdk.TtsRequest;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class TourActivity extends AppCompatActivity {
 
+    /** This array of paintings to tour */
     private Painting[] paintings = null;
+    /** ImageView to hold the painting image */
     private ImageView paintingImage;
+    /** Text holding the artist name */
     private TextView artistTextView;
+    /** Text holding the year the painting was created */
     private TextView yearTextView;
+    /** Text holding the painting medium */
     private TextView mediumTextView;
+    /** Text holding the painting measurements */
     private TextView measurementsTextView;
+    /** Text holding a description of the painting */
     private TextView descriptionTextView;
+    /** Button to continue the tour */
     private Button continueButton;
+
+    /** Random int generator */
+    private Random rand = new Random();
+    /** Low volume to avoid disturbing people */
+    private static final int VOLUME_LEVEL = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setTitle(R.string.tour_title);
-        setContentView(R.layout.activity_tour);
+        setContentView(R.layout.activity_tour_crossfade);
+
+        // Find views
         paintingImage = findViewById(R.id.painting_image);
         artistTextView = findViewById(R.id.artist_text);
         yearTextView = findViewById(R.id.year_text);
@@ -63,14 +80,66 @@ public class TourActivity extends AppCompatActivity {
             toast.show();
         }
 
-        // Give the tour
-        beginTour();
+        // Update display of painting information just in case
+        if (paintings.length > 0) {
+            updatePaintingInfo(paintings[0]);
+        }
+
+        // Fade from the start screen to the actual tour layout
+        fadeBetweenLayoutsAndBeginTour();
+    }
+
+    private void fadeBetweenLayoutsAndBeginTour() {
+        // Yoinked from https://stackoverflow.com/a/11712892
+        final View tourStartLayout = findViewById(R.id.tour_start_layout);
+        final View tourLayout = findViewById(R.id.tour_layout);
+        final Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+        final Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        fadeOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                tourStartLayout.setVisibility(View.GONE);
+                beginTour();
+            }
+        });
+
+        // Animate the crossfade
+        Handler h = new Handler();
+        h.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                tourStartLayout.startAnimation(fadeOut);
+                tourLayout.startAnimation(fadeIn);
+            }
+        }, 1000);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Robot.getInstance().cancelAllTtsRequests();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Robot.getInstance().cancelAllTtsRequests();
     }
 
     /**
      * Begins the Temi tour
      */
     private void beginTour() {
+        // Set volume and begin the tour
+        Robot.getInstance().setVolume(VOLUME_LEVEL);
         guideToPainting(0);
     }
 
@@ -123,8 +192,30 @@ public class TourActivity extends AppCompatActivity {
 
             // TODO: use TTS to have robot speak about the painting
             Robot.getInstance().speak(TtsRequest.create(
-                    painting.getDescription(), false, TtsRequest.Language.EN_US));
+                    getTextToSpeak(painting), false, TtsRequest.Language.EN_US));
 
+        }
+    }
+
+    /**
+     * Generates the text to speak to the user using Temi's TTS
+     * @param painting is the Painting to describe to the user
+     * @return the string to speak
+     */
+    private String getTextToSpeak(Painting painting) {
+        String artistName = painting.getArtist().getName();
+        String medium = painting.getMedium();
+        String description = painting.getDescription();
+
+        // TODO: add more speech patterns to choose from (kind of boring at the moment)
+        switch (rand.nextInt(2)) {
+            case 0:
+                return "This work of art by " + artistName + " was created on " + medium
+                    + ". Pictured is " + description;
+            case 1:
+                return "This " + medium + ", created by " + artistName + ", displays " + description;
+            default:
+                return "";
         }
     }
 
