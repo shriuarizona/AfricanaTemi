@@ -3,9 +3,12 @@ package com.example.temitour;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import com.robotemi.sdk.Robot;
+import com.robotemi.sdk.TtsRequest;
 
 import java.io.InputStreamReader;
 import java.util.HashMap;
@@ -67,9 +71,6 @@ public class TourActivity extends AppCompatActivity {
      * Begins the Temi tour
      */
     private void beginTour() {
-        Toast toast = Toast.makeText(getApplicationContext(), "Beginning tour",
-                Toast.LENGTH_SHORT);
-        toast.show();
         guideToPainting(0);
     }
 
@@ -94,17 +95,13 @@ public class TourActivity extends AppCompatActivity {
             } else {
                 continueButton.setText(R.string.finish_tour);
                 continueButton.setOnClickListener((v) -> {
-                    // ALertDialog builder to ask if they want to take survey or skip
                     AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setTitle("Rate your experience");
-                    TextView tv = new TextView(this);
-                    tv.setText("Help us improve your experience by taking a short survey");
-                    builder.setView(tv);
+                    builder.setTitle(R.string.rate_experience);
+                    builder.setMessage(R.string.rate_experience_message);
                     builder.setPositiveButton("Take Survey", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            // TODO: check if this opens the survey activity properly
-                            // TODO: make sure that the TourActivity is also closed after they complete the SurveyActivity
+                            finish();
                             Intent intent = new Intent(getApplicationContext(), SurveyActivity.class);
                             startActivity(intent);
                         }
@@ -121,15 +118,34 @@ public class TourActivity extends AppCompatActivity {
             }
 
             // Take the user to the painting
-            Robot.getInstance().goTo(painting.getLocation());
+            // TODO: go to the location (uncomment below line)
+            // Robot.getInstance().goTo(painting.getLocation());
+
             // TODO: use TTS to have robot speak about the painting
+            Robot.getInstance().speak(TtsRequest.create(
+                    painting.getDescription(), false, TtsRequest.Language.EN_US));
+
         }
     }
 
+    /**
+     * Updates the painting information on display. This includes the painting image
+     * as well as metadata such as artist, year, etc
+     * @param painting is the painting to update the information to
+     */
     private void updatePaintingInfo(Painting painting) {
         // Update the painting image
         try {
-            Drawable d = getResources().getDrawable(painting.getImageId());
+            Drawable d = getResources().getDrawable(painting.getImageId(), null);
+            int intrinsicHeight = d.getIntrinsicHeight();
+            int intrinsicWidth = d.getIntrinsicWidth();
+            Log.d("abcdefg", "height = " + intrinsicHeight);
+            Log.d("abcdefg", "width = " + intrinsicWidth);
+//            ViewGroup.LayoutParams lp = paintingImage.getLayoutParams();
+//            float factor;
+//            lp.width = 3;
+//            lp.height = 7;
+//            paintingImage.setLayoutParams(lp);
             paintingImage.setImageDrawable(d);
         } catch (Exception e) {
             Log.e("abcdefg", e.getMessage());
@@ -169,7 +185,5 @@ public class TourActivity extends AppCompatActivity {
             p.setArtist(map.get(p.getArtistId()));
         }
     }
-
-
 
 }

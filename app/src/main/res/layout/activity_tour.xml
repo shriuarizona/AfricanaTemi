@@ -6,21 +6,27 @@
     android:layout_height="match_parent"
     android:background="@drawable/sample_gradient">
 
+    <!--        android:layout_width="487dp"-->
+    <!--        android:layout_height="595dp"-->
     <ImageView
         android:id="@+id/painting_image"
-        android:layout_width="487dp"
-        android:layout_height="595dp"
-        android:layout_marginTop="96dp"
+        android:layout_width="480dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:scaleType="fitStart"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/painting00" />
 
     <TableLayout
         android:id="@+id/painting_info_table"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/painting_image"
         app:layout_constraintTop_toTopOf="@+id/painting_image">
 
@@ -32,7 +38,7 @@
 
             <TextView
                 style="@style/painting_info_key"
-                android:text="Artist" />
+                android:text="@string/artist" />
 
             <TextView
                 android:id="@+id/artist_text"
@@ -48,7 +54,7 @@
 
             <TextView
                 style="@style/painting_info_key"
-                android:text="Year" />
+                android:text="@string/year" />
 
             <TextView
                 android:id="@+id/year_text"
@@ -64,7 +70,7 @@
 
             <TextView
                 style="@style/painting_info_key"
-                android:text="Medium" />
+                android:text="@string/medium" />
 
             <TextView
                 android:id="@+id/medium_text"
@@ -80,7 +86,7 @@
 
             <TextView
                 style="@style/painting_info_key"
-                android:text="Measurements" />
+                android:text="@string/measurements" />
 
             <TextView
                 android:id="@+id/measurements_text"
@@ -96,7 +102,7 @@
 
             <TextView
                 style="@style/painting_info_key"
-                android:text="Description" />
+                android:text="@string/description" />
 
             <TextView
                 android:id="@+id/description_text"
@@ -118,12 +124,13 @@
         app:srcCompat="@drawable/art_gallery_qr_code" />
 
     <TextView
-        android:id="@+id/textView9"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Interactive AR experience"
-        android:textColor="@color/black"
+        android:layout_marginEnd="5dp"
+        android:text="Scan for interactive AR experience"
+        android:textColor="@color/white"
         android:textSize="20sp"
+        android:maxWidth="180dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -131,7 +138,7 @@
         android:id="@+id/continueButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="25dp"
         android:backgroundTint="#2196F3"
         android:fontFamily="sans-serif"
         android:paddingLeft="24dp"
@@ -140,11 +147,11 @@
         android:paddingBottom="6dp"
         android:text="@string/continue_tour"
         android:textAllCaps="false"
-        android:textSize="55sp"
+        android:textSize="40sp"
         android:textStyle="bold"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/painting_image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

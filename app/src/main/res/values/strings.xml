@@ -7,6 +7,13 @@
     <string name="back">Back</string>
     <string name="next">Next</string>
     <string name="submit">Submit</string>
+    <string name="artist">Artist:</string>
+    <string name="year">Year:</string>
+    <string name="medium">Medium:</string>
+    <string name="measurements">Measurements:</string>
+    <string name="description">Description:</string>
+    <string name="rate_experience">Rate your experience</string>
+    <string name="rate_experience_message">"Help us improve your experience by taking a short survey"</string>
     <string name="continue_tour">Continue</string>
     <string name="finish_tour">Finish</string>
     <string name="tour_title">Culture Walk</string>
