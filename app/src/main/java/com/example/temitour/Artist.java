@@ -1,8 +1,12 @@
 package com.example.temitour;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Artist {
 
+    @SerializedName("name")
     private String name;
+    @SerializedName("id")
     private int id;
 
     public Artist(String name, int id) {

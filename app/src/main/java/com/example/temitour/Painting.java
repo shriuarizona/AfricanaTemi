@@ -3,6 +3,7 @@ package com.example.temitour;
 import android.graphics.drawable.Drawable;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 
 import java.lang.reflect.Field;
 
@@ -12,11 +13,17 @@ import java.lang.reflect.Field;
 public class Painting {
 
     private Artist artist;
+    @SerializedName("location")
     private String location;
+    @SerializedName("artistId")
     private int artistId;
+    @SerializedName("year")
     private String year;
+    @SerializedName("medium")
     private String medium;
+    @SerializedName("measurements")
     private String measurements;
+    @SerializedName("description")
     private String description;
 
     public Painting(String location, int artistId, String year, String medium, String measurements,
