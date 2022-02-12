@@ -1,13 +1,20 @@
 package com.example.temitour;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
 import com.robotemi.sdk.Robot;
 import com.robotemi.sdk.listeners.OnRobotReadyListener;
+import com.robotemi.sdk.permission.OnRequestPermissionResultListener;
+import com.robotemi.sdk.permission.Permission;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnRobotReadyListener {
 
@@ -73,4 +80,5 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
         Intent intent = new Intent(this, SurveyActivity.class);
         startActivity(intent);
     }
+
 }

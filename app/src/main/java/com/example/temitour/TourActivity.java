@@ -23,13 +23,14 @@ import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import com.robotemi.sdk.Robot;
 import com.robotemi.sdk.TtsRequest;
+import com.robotemi.sdk.listeners.OnRobotReadyListener;
 
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class TourActivity extends AppCompatActivity {
+public class TourActivity extends AppCompatActivity implements OnRobotReadyListener {
 
     /** This array of paintings to tour */
     private Painting[] paintings = null;
@@ -67,26 +68,12 @@ public class TourActivity extends AppCompatActivity {
         measurementsTextView = findViewById(R.id.measurements_text);
         descriptionTextView = findViewById(R.id.description_text);
         continueButton = findViewById(R.id.continueButton);
+    }
 
-        // Try to load the paintings and artists
-        try {
-            this.loadData();
-        } catch (Exception e) {
-            // Failed to load data
-            Log.e("abcdefg", "Error loading paintings/artists", e);
-            finish();
-            Toast toast = Toast.makeText(getApplicationContext(), "Failed to load painting and/or artist data",
-                    Toast.LENGTH_LONG);
-            toast.show();
-        }
-
-        // Update display of painting information just in case
-        if (paintings.length > 0) {
-            updatePaintingInfo(paintings[0]);
-        }
-
-        // Fade from the start screen to the actual tour layout
-        fadeBetweenLayoutsAndBeginTour();
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Robot.getInstance().addOnRobotReadyListener(this);
     }
 
     private void fadeBetweenLayoutsAndBeginTour() {
@@ -123,8 +110,37 @@ public class TourActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onRobotReady(boolean isReady) {
+        if (isReady) {
+            // TODO: on the device the app is installed on, turn on the SETTINGS permission
+            Robot.getInstance().setVolume(VOLUME_LEVEL);
+
+            // Try to load the paintings and artists
+            try {
+                this.loadData();
+            } catch (Exception e) {
+                // Failed to load data
+                Log.e("abcdefg", "Error loading paintings/artists", e);
+                finish();
+                Toast toast = Toast.makeText(getApplicationContext(), "Failed to load painting and/or artist data",
+                        Toast.LENGTH_LONG);
+                toast.show();
+            }
+
+            // Update display of painting information just in case
+            if (paintings.length > 0) {
+                updatePaintingInfo(paintings[0]);
+            }
+
+            // Fade from the start screen to the actual tour layout
+            fadeBetweenLayoutsAndBeginTour();
+        }
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
+        Robot.getInstance().removeOnRobotReadyListener(this);
         Robot.getInstance().cancelAllTtsRequests();
     }
 
@@ -164,6 +180,7 @@ public class TourActivity extends AppCompatActivity {
             } else {
                 continueButton.setText(R.string.finish_tour);
                 continueButton.setOnClickListener((v) -> {
+                    Robot.getInstance().cancelAllTtsRequests();
                     AlertDialog.Builder builder = new AlertDialog.Builder(this);
                     builder.setTitle(R.string.rate_experience);
                     builder.setMessage(R.string.rate_experience_message);
@@ -228,15 +245,6 @@ public class TourActivity extends AppCompatActivity {
         // Update the painting image
         try {
             Drawable d = getResources().getDrawable(painting.getImageId(), null);
-            int intrinsicHeight = d.getIntrinsicHeight();
-            int intrinsicWidth = d.getIntrinsicWidth();
-            Log.d("abcdefg", "height = " + intrinsicHeight);
-            Log.d("abcdefg", "width = " + intrinsicWidth);
-//            ViewGroup.LayoutParams lp = paintingImage.getLayoutParams();
-//            float factor;
-//            lp.width = 3;
-//            lp.height = 7;
-//            paintingImage.setLayoutParams(lp);
             paintingImage.setImageDrawable(d);
         } catch (Exception e) {
             Log.e("abcdefg", e.getMessage());

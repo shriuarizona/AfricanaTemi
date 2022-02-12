@@ -31,7 +31,6 @@ public class SurveyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_survey);
         loadQuestionFragmentIds();
 
-        Log.d("abcdefg", "Created survey view");
         progressBar = findViewById(R.id.survey_progress_bar);
         progressText = findViewById(R.id.survey_progress_text);
         progressBar.setMax(questionFragmentIds.length);
