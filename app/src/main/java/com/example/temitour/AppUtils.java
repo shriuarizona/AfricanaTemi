@@ -19,12 +19,12 @@ public class AppUtils {
      * @param dp is the size in "dp"
      * @return size in "px"
      */
-    public static float dpToPx(Resources r, float dp) {
+    public static int dpToPx(Resources r, float dp) {
         // Yoinked from https://stackoverflow.com/a/6327095
         float px = TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()
         );
-        return px;
+        return Math.round(px);
     }
 
 }

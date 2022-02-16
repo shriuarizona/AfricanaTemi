@@ -18,6 +18,7 @@
     <string name="rate_experience">Rate your experience</string>
     <string name="rate_experience_message">"Help us improve your experience by taking a short survey"</string>
     <string name="continue_tour">Continue</string>
+    <string name="select_painting">Select</string>
     <string name="finish_tour">Finish</string>
     <string name="tour_title">Culture Walk</string>
     <string name="survey_title">"Tour Survey"</string>

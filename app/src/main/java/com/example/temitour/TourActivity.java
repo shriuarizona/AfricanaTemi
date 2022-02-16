@@ -1,5 +1,6 @@
 package com.example.temitour;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -8,14 +9,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -48,6 +52,10 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
     private TextView descriptionTextView;
     /** Button to continue the tour */
     private Button continueButton;
+    /** Button to select a painting to go to */
+    private Button selectButton;
+    /** Button to finish the tour */
+    private Button finishButton;
 
     /** Random int generator */
     private Random rand = new Random();
@@ -68,6 +76,12 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
         measurementsTextView = findViewById(R.id.measurements_text);
         descriptionTextView = findViewById(R.id.description_text);
         continueButton = findViewById(R.id.continueButton);
+        selectButton = findViewById(R.id.selectButton);
+        selectButton.setOnClickListener((v) -> {
+            userSelectPainting();
+        });
+        finishButton = findViewById(R.id.finishButton);
+        finishButton.setOnClickListener((v) -> finish());
     }
 
     @Override
@@ -164,54 +178,42 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
      * @param i is the index of the painting in the array of Paintings
      */
     private void guideToPainting(int i) {
-        // Take them to the painting
-        if (i < paintings.length) {
-            // Update the painting shown
-            Painting painting = paintings[i];
-            updatePaintingInfo(painting);
-
-            // Update the Continue button
-            if (i + 1 < paintings.length) {
-                // Still other paintings left to go
-                continueButton.setText(R.string.continue_tour);
-                continueButton.setOnClickListener((v) -> {
-                    guideToPainting(i + 1);
-                });
-            } else {
-                continueButton.setText(R.string.finish_tour);
-                continueButton.setOnClickListener((v) -> {
-                    Robot.getInstance().cancelAllTtsRequests();
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setTitle(R.string.rate_experience);
-                    builder.setMessage(R.string.rate_experience_message);
-                    builder.setPositiveButton("Take Survey", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            finish();
-                            Intent intent = new Intent(getApplicationContext(), SurveyActivity.class);
-                            startActivity(intent);
-                        }
-                    });
-                    builder.setNegativeButton("No Thanks", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                            finish();
-                        }
-                    });
-                    builder.show();
-                });
-            }
-
-            // Take the user to the painting
-            // TODO: go to the location (uncomment below line)
-            // Robot.getInstance().goTo(painting.getLocation());
-
-            // TODO: use TTS to have robot speak about the painting
-            Robot.getInstance().speak(TtsRequest.create(
-                    getTextToSpeak(painting), false, TtsRequest.Language.EN_US));
-
+        if (!(i < paintings.length)) {
+            return;
         }
+
+        // Update the painting shown
+        Painting painting = paintings[i];
+        updatePaintingInfo(painting);
+
+        // Update the Continue button
+        if (i + 1 < paintings.length) {
+            // Still other paintings left to go
+            // TODO: could set the button color to the blue
+            continueButton.setText(R.string.continue_tour);
+            continueButton.setOnClickListener((v) -> {
+                guideToPainting(i + 1);
+            });
+        } else {
+            // TODO: setting the continue button to "Finish" looks bad because there
+            // is already a finish button right next to it
+
+            // TODO: could set the button color to the bright red
+            continueButton.setText(R.string.finish_tour);
+            continueButton.setOnClickListener((v) -> {
+                // Ask the user if they want to take the survey
+                Robot.getInstance().cancelAllTtsRequests();
+                new TakeSurveyDialogBuilder(this).show();
+            });
+        }
+
+        // Take the user to the painting
+        // TODO: go to the location (uncomment below line)
+        // Robot.getInstance().goTo(painting.getLocation());
+
+        // TODO: use TTS to have robot speak about the painting
+        Robot.getInstance().speak(TtsRequest.create(
+                getTextToSpeak(painting), false, TtsRequest.Language.EN_US));
     }
 
     /**
@@ -243,12 +245,8 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
      */
     private void updatePaintingInfo(Painting painting) {
         // Update the painting image
-        try {
-            Drawable d = getResources().getDrawable(painting.getImageId(), null);
-            paintingImage.setImageDrawable(d);
-        } catch (Exception e) {
-            Log.e("abcdefg", e.getMessage());
-        }
+        Drawable d = getPaintingImage(painting);
+        paintingImage.setImageDrawable(d);
 
         // Update the painting info displayed
         artistTextView.setText(painting.getArtist().getName());
@@ -256,6 +254,18 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
         mediumTextView.setText(painting.getMedium());
         measurementsTextView.setText(painting.getMeasurements());
         descriptionTextView.setText(painting.getDescription());
+    }
+
+    private Drawable getPaintingImage(Painting p) {
+        return getResources().getDrawable(p.getImageId(), null);
+    }
+
+    /**
+     * Creates a popup allowing the user to select which painting to go to
+     */
+    private void userSelectPainting() {
+        Robot.getInstance().cancelAllTtsRequests();
+        new SelectPaintingDialogBuilder(this).show();
     }
 
     /**
@@ -283,6 +293,104 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
         for (Painting p : paintings) {
             p.setArtist(map.get(p.getArtistId()));
         }
+    }
+
+    private class TakeSurveyDialogBuilder extends AlertDialog.Builder {
+
+        public TakeSurveyDialogBuilder(@NonNull Context context) {
+            super(context);
+            this.setTitle(R.string.rate_experience);
+            this.setMessage(R.string.rate_experience_message);
+
+            // Set up the dialog buttons
+            this.setPositiveButton("Take Survey", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // Take the user to the survey
+                    finish();
+                    Intent intent = new Intent(getApplicationContext(), SurveyActivity.class);
+                    startActivity(intent);
+                }
+            });
+            this.setNegativeButton("No Thanks", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // User does not want to take the survey; quit
+                    dialog.cancel();
+                    finish();
+                }
+            });
+        }
+    }
+
+    private class SelectPaintingDialogBuilder extends AlertDialog.Builder {
+
+        private AlertDialog dialog;
+
+        public SelectPaintingDialogBuilder(@NonNull Context context) {
+            super(context);
+            this.setTitle("Select Painting");
+
+            // Create the Table of paintings
+            // TODO: check if the select image table looks good / works
+            // TODO: possible convert the ImageViews to ImageButtons
+            TableLayout table = new TableLayout(context);
+            int i = 0;
+            while (i < paintings.length) {
+                TableRow row = new TableRow(context);
+                for (int j = 0; j < 4; ++j) {
+                    if (i >= paintings.length) {
+                        break;
+                    }
+                    row.addView(createSelectImage(i));
+                    ++i;
+                }
+                table.addView(row);
+            }
+            this.setView(table);
+
+            this.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+
+            // Create the dialog ahead of time so that the ImageView click listeners
+            // can dismiss the dialog and guide to the corresponding painting
+            this.dialog = this.create();
+        }
+
+        @Override
+        public AlertDialog show() {
+            dialog.show();
+            return dialog;
+        }
+
+        private ImageView createSelectImage(int paintingNum) {
+            // Create the ImageView
+            ImageView imageView = new ImageView(TourActivity.this);
+            imageView.setImageDrawable(getPaintingImage(paintings[paintingNum]));
+            imageView.setAdjustViewBounds(true);
+
+            // Set the click listener
+            imageView.setOnClickListener((v) -> {
+                dialog.dismiss();
+                guideToPainting(paintingNum);
+            });
+
+            // Set layout / margins
+            ViewGroup.MarginLayoutParams marginParams = new ViewGroup.MarginLayoutParams(
+                    0, ViewGroup.MarginLayoutParams.WRAP_CONTENT
+            );
+            int margin = AppUtils.dpToPx(getResources(), 20);
+            marginParams.setMargins(margin, margin, margin, margin);
+            imageView.setLayoutParams(marginParams);
+
+            return imageView;
+        }
+
     }
 
 }
