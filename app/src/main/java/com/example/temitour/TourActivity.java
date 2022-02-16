@@ -295,8 +295,19 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
         }
     }
 
+    /**
+     * This class is a dialog builder for asking the user if they want to take
+     * a survey when the tour is complete
+     *
+     * @author Gavin Vogt
+     */
     private class TakeSurveyDialogBuilder extends AlertDialog.Builder {
 
+        /**
+         * Creates and sets up everything inside the dialog for asking
+         * the user if they want to take the survey
+         * @param context the parent context
+         */
         public TakeSurveyDialogBuilder(@NonNull Context context) {
             super(context);
             this.setTitle(R.string.rate_experience);
@@ -323,10 +334,21 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
         }
     }
 
+    /**
+     * This class is a dialog builder for asking the user to select which painting
+     * they want to go to
+     *
+     * @author Gavin Vogt
+     */
     private class SelectPaintingDialogBuilder extends AlertDialog.Builder {
 
+        /** The dialog created by this builder */
         private AlertDialog dialog;
 
+        /**
+         * Creates and sets up everything inside the dialog for selecting the painting
+         * @param context the parent context
+         */
         public SelectPaintingDialogBuilder(@NonNull Context context) {
             super(context);
             this.setTitle("Select Painting");
@@ -368,6 +390,12 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
             return dialog;
         }
 
+        /**
+         * Creates an image that the user can click on, closing the dialog
+         * and taking them to the corresponding painting
+         * @param paintingNum is the index of the painting
+         * @return clickable View that displays the painting image
+         */
         private ImageView createSelectImage(int paintingNum) {
             // Create the ImageView
             ImageView imageView = new ImageView(TourActivity.this);

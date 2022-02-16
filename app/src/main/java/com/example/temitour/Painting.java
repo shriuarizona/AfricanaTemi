@@ -8,7 +8,9 @@ import com.google.gson.annotations.SerializedName;
 import java.lang.reflect.Field;
 
 /**
- * This enum contains information about each painting in the art gallery
+ * This class represents a painting in the art gallery
+ *
+ * @author Gavin Vogt
  */
 public class Painting {
 
@@ -26,6 +28,15 @@ public class Painting {
     @SerializedName("description")
     private String description;
 
+    /**
+     * Creates the painting
+     * @param location is the string representing the location of the painting in Temi's map
+     * @param artistId is the ID of the Artist that created this painting
+     * @param year is the year the painting was created
+     * @param medium is the medium on which the painting was created
+     * @param measurements are the measurements of the painting
+     * @param description is the description of the painting
+     */
     public Painting(String location, int artistId, String year, String medium, String measurements,
                     String description) {
         this.location = location;

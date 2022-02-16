@@ -2,6 +2,11 @@ package com.example.temitour;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * This class represents the artist of a painting in the art gallery.
+ *
+ * @author Gavin Vogt
+ */
 public class Artist {
 
     @SerializedName("name")

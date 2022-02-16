@@ -18,7 +18,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnRobotReadyListener {
 
+    /** Button for taking the tour */
     private Button tourButton;
+    /** Button for taking the survey */
     private Button surveyButton;
 
     @Override
