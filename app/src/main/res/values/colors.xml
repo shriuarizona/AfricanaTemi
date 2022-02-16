@@ -13,5 +13,7 @@
     <color name="progress_outline">#000073</color>
     <color name="survey_progress_text">#FFFFFF</color>
     <color name="bright_green">#FF0CD337</color>
+    <color name="bright_blue">#64A9E1</color>
+    <color name="bright_red">#EA6872</color>
     <color name="dark_red">#BD1D1D</color>
 </resources>
