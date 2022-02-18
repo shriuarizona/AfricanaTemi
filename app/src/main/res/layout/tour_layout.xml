@@ -144,29 +144,10 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/continueButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/bright_blue"
-        android:fontFamily="sans-serif"
-        android:paddingLeft="24dp"
-        android:paddingTop="6dp"
-        android:paddingRight="24dp"
-        android:paddingBottom="6dp"
-        android:text="@string/continue_tour"
-        android:textAllCaps="false"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/painting_info_table" />
-
-    <Button
         android:id="@+id/selectButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginBottom="30dp"
         android:backgroundTint="@color/bright_blue"
         android:fontFamily="sans-serif"
         android:paddingLeft="24dp"
@@ -178,8 +159,27 @@
         android:textSize="40sp"
         android:textStyle="bold"
         app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/continueButton"
-        app:layout_constraintStart_toEndOf="@+id/continueButton"
-        app:layout_constraintTop_toTopOf="@+id/continueButton" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/painting_info_table" />
+
+    <Button
+        android:id="@+id/continueButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:backgroundTint="@color/bright_blue"
+        android:fontFamily="sans-serif"
+        android:paddingLeft="24dp"
+        android:paddingTop="6dp"
+        android:paddingRight="24dp"
+        android:paddingBottom="6dp"
+        android:text="@string/continue_tour"
+        android:textAllCaps="false"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/selectButton"
+        app:layout_constraintStart_toEndOf="@+id/selectButton"
+        app:layout_constraintTop_toTopOf="@+id/selectButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
