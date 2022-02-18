@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/sample_gradient">
 
-    <!--        android:layout_width="487dp"-->
-    <!--        android:layout_height="595dp"-->
     <ImageView
         android:id="@+id/painting_image"
         android:layout_width="480dp"
@@ -24,7 +22,7 @@
         android:id="@+id/painting_info_table"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -152,15 +150,13 @@
         android:textStyle="bold"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.25"
-        app:layout_constraintStart_toEndOf="@+id/painting_image" />
+        app:layout_constraintStart_toStartOf="@+id/painting_info_table" />
 
     <Button
         android:id="@+id/selectButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginStart="30dp"
         android:backgroundTint="@color/bright_blue"
         android:fontFamily="sans-serif"
         android:paddingLeft="24dp"
@@ -168,25 +164,6 @@
         android:paddingRight="24dp"
         android:paddingBottom="6dp"
         android:text="@string/select_painting"
-        android:textAllCaps="false"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/continueButton"
-        app:layout_constraintStart_toStartOf="@+id/continueButton" />
-
-    <Button
-        android:id="@+id/finishButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:backgroundTint="@color/bright_red"
-        android:fontFamily="sans-serif"
-        android:paddingLeft="24dp"
-        android:paddingTop="6dp"
-        android:paddingRight="24dp"
-        android:paddingBottom="6dp"
-        android:text="@string/finish_tour"
         android:textAllCaps="false"
         android:textSize="40sp"
         android:textStyle="bold"

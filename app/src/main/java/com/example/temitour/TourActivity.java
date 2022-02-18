@@ -1,6 +1,5 @@
 package com.example.temitour;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,6 +9,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -58,8 +60,6 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
     private Button continueButton;
     /** Button to select a painting to go to */
     private Button selectButton;
-    /** Button to finish the tour */
-    private Button finishButton;
 
     /** Random int generator */
     private Random rand = new Random();
@@ -84,8 +84,8 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
         selectButton.setOnClickListener((v) -> {
             userSelectPainting();
         });
-        finishButton = findViewById(R.id.finishButton);
-        finishButton.setOnClickListener((v) -> finish());
+        //toolbar = findViewById(R.id.tour_toolbar);
+
     }
 
     @Override
@@ -94,6 +94,25 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
         Robot.getInstance().addOnRobotReadyListener(this);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_tour, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_finish_tour) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Fades between the start layout and the actual tour layout.
+     * Then begins the tour.
+     */
     private void fadeBetweenLayoutsAndBeginTour() {
         // Yoinked from https://stackoverflow.com/a/11712892
         final View tourStartLayout = findViewById(R.id.tour_start_layout);
@@ -195,17 +214,15 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
         // Update the Continue button
         if (i + 1 < paintings.length) {
             // Still other paintings left to go
-            // TODO: could set the button color to the blue
             continueButton.setText(R.string.continue_tour);
+            continueButton.setBackgroundColor(getResources().getColor(R.color.bright_blue));
             continueButton.setOnClickListener((v) -> {
                 guideToPainting(i + 1);
             });
         } else {
-            // TODO: setting the continue button to "Finish" looks bad because there
-            // is already a finish button right next to it
-
-            // TODO: could set the button color to the bright red
+            // Last painting in the tour
             continueButton.setText(R.string.finish_tour);
+            continueButton.setBackgroundColor(getResources().getColor(R.color.bright_red));
             continueButton.setOnClickListener((v) -> {
                 // Ask the user if they want to take the survey
                 Robot.getInstance().cancelAllTtsRequests();
