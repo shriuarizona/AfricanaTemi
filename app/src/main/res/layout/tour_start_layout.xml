@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/sample_gradient">
 
-    <!-- TODO: Use this intro layout when the tour starts and fade into actual tour after a few seconds -->
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
