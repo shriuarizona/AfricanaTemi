@@ -527,10 +527,9 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
             }
 
             /**
-             *
-             * @param v
-             * @param event
-             * @return
+             * Handles when the image is clicked by shading it
+             * @param v is the View that was touched
+             * @param event is the event code
              */
             private boolean handleTouch(View v, MotionEvent event) {
                 // Yoinked and modified from https://stackoverflow.com/a/14483533
