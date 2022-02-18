@@ -1,18 +1,22 @@
 package com.example.temitour;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -186,6 +190,8 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
         Painting painting = paintings[i];
         updatePaintingInfo(painting);
 
+        // TODO: update the QR code to be a HoloX hologram of a curator talking about the artist (or painting)
+
         // Update the Continue button
         if (i + 1 < paintings.length) {
             // Still other paintings left to go
@@ -211,7 +217,6 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
         // TODO: go to the location (uncomment below line)
         // Robot.getInstance().goTo(painting.getLocation());
 
-        // TODO: use TTS to have robot speak about the painting
         Robot.getInstance().speak(TtsRequest.create(
                 getTextToSpeak(painting), false, TtsRequest.Language.EN_US));
     }
@@ -345,6 +350,9 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
         /** The dialog created by this builder */
         private AlertDialog dialog;
 
+        /** Number of paintings per row in the dialog */
+        private static final int PAINTINGS_PER_ROW = 5;
+
         /**
          * Creates and sets up everything inside the dialog for selecting the painting
          * @param context the parent context
@@ -354,13 +362,21 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
             this.setTitle("Select Painting");
 
             // Create the Table of paintings
-            // TODO: check if the select image table looks good / works
-            // TODO: possible convert the ImageViews to ImageButtons
             TableLayout table = new TableLayout(context);
+            int tableMargin = AppUtils.dpToPx(getResources(), 24);
+            table.setPaddingRelative(tableMargin, 0, tableMargin, 0);
+            table.setLayoutParams(new ViewGroup.LayoutParams(
+                    FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT
+            ));
+
+            // Add each group of 5 paintings to a table row
             int i = 0;
             while (i < paintings.length) {
                 TableRow row = new TableRow(context);
-                for (int j = 0; j < 4; ++j) {
+                row.setLayoutParams(new ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
+                ));
+                for (int j = 0; j < PAINTINGS_PER_ROW; ++j) {
                     if (i >= paintings.length) {
                         break;
                     }
@@ -377,16 +393,17 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
                     dialog.cancel();
                 }
             });
-
-
-            // Create the dialog ahead of time so that the ImageView click listeners
-            // can dismiss the dialog and guide to the corresponding painting
-            this.dialog = this.create();
         }
 
         @Override
         public AlertDialog show() {
+            // Show the dialog and save the reference so the images can use it
+            dialog = this.create();
             dialog.show();
+            dialog.getWindow().setLayout(
+                    (int) (getResources().getDisplayMetrics().widthPixels * 0.65),
+                    (int) (getResources().getDisplayMetrics().heightPixels * 0.70)
+            );
             return dialog;
         }
 
@@ -398,9 +415,9 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
          */
         private ImageView createSelectImage(int paintingNum) {
             // Create the ImageView
-            ImageView imageView = new ImageView(TourActivity.this);
+            SelectPaintingButton imageView = new SelectPaintingButton(TourActivity.this,
+                    paintingNum % PAINTINGS_PER_ROW);
             imageView.setImageDrawable(getPaintingImage(paintings[paintingNum]));
-            imageView.setAdjustViewBounds(true);
 
             // Set the click listener
             imageView.setOnClickListener((v) -> {
@@ -408,15 +425,77 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
                 guideToPainting(paintingNum);
             });
 
-            // Set layout / margins
-            ViewGroup.MarginLayoutParams marginParams = new ViewGroup.MarginLayoutParams(
-                    0, ViewGroup.MarginLayoutParams.WRAP_CONTENT
-            );
-            int margin = AppUtils.dpToPx(getResources(), 20);
-            marginParams.setMargins(margin, margin, margin, margin);
-            imageView.setLayoutParams(marginParams);
-
             return imageView;
+        }
+
+        /**
+         * This class represents an ImageView holding a painting image that can be clicked
+         * to select.
+         *
+         * @author Gavin Vogt
+         */
+        private class SelectPaintingButton extends androidx.appcompat.widget.AppCompatImageView {
+
+            /**
+             * Creates the button for selecting a painting
+             * @param context is the parent context
+             * @param colNum is the column this button will be in
+             */
+            public SelectPaintingButton(Context context, int colNum) {
+                super(context);
+                this.setScaleType(ImageView.ScaleType.FIT_START);
+                this.setAdjustViewBounds(true);
+
+                // Set layout / margins
+                // Note: this was a pain and images didn't show up until I used
+                // TableRow.LayoutParams so the `weight` would work properly
+                TableRow.MarginLayoutParams layoutParams = new TableRow.LayoutParams(
+                        0, TableRow.LayoutParams.WRAP_CONTENT, 1.0f
+                );
+                final int margin = AppUtils.dpToPx(getResources(), 8);
+                final int leftMargin = (colNum == 0) ? 0 : margin;
+                final int rightMargin = (colNum == PAINTINGS_PER_ROW - 1) ? 0 : margin;
+                layoutParams.setMargins(leftMargin, margin, rightMargin, margin);
+                this.setLayoutParams(layoutParams);
+
+                // Set the touch listener
+                this.setOnTouchListener(new OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return handleTouch(v, event);
+                    }
+                });
+            }
+
+            /**
+             *
+             * @param v
+             * @param event
+             * @return
+             */
+            private boolean handleTouch(View v, MotionEvent event) {
+                // Yoinked and modified from https://stackoverflow.com/a/14483533
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        ImageView view = (ImageView) v;
+                        // overlay is black with transparency of 0x77 (119)
+                        view.getDrawable().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+                        view.invalidate();
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_OUTSIDE:
+                    case MotionEvent.ACTION_CANCEL: {
+                        ImageView view = (ImageView) v;
+                        // clear the overlay
+                        view.getDrawable().clearColorFilter();
+                        view.invalidate();
+                        break;
+                    }
+                }
+
+                return false;
+            }
         }
 
     }

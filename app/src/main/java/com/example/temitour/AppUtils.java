@@ -24,7 +24,7 @@ public class AppUtils {
         float px = TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()
         );
-        return Math.round(px);
+        return (int) (px + 0.5f);
     }
 
 }
