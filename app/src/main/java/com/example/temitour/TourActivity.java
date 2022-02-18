@@ -294,13 +294,32 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
         paintingImage.setImageDrawable(d);
 
         // Update the painting info displayed
-        artistTextView.setText(painting.getArtist().getName());
-        yearTextView.setText(painting.getYear());
-        mediumTextView.setText(painting.getMedium());
-        measurementsTextView.setText(painting.getMeasurements());
-        descriptionTextView.setText(painting.getDescription());
+        artistTextView.setText(checkEmpty(painting.getArtist().getName()));
+        yearTextView.setText(checkEmpty(painting.getYear()));
+        mediumTextView.setText(checkEmpty(painting.getMedium()));
+        measurementsTextView.setText(checkEmpty(painting.getMeasurements()));
+        descriptionTextView.setText(checkEmpty(painting.getDescription()));
     }
 
+    /**
+     * Checks if the given info text is empty and returns the correct info
+     * text to use.
+     * @param infoText is the info text
+     * @return "N/A" if null or empty string, otherwise unchanged infoText
+     */
+    private String checkEmpty(String infoText) {
+        if (infoText == null || infoText.equals("")) {
+            return "N/A";
+        } else {
+            return infoText;
+        }
+    }
+
+    /**
+     * Convenient method for getting a painting image
+     * @param p is the painting
+     * @return painting drawable image
+     */
     private Drawable getPaintingImage(Painting p) {
         return getResources().getDrawable(p.getImageId(), null);
     }
