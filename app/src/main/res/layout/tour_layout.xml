@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     android:background="@drawable/sample_gradient">
 
+    <ImageButton
+        android:id="@+id/volumeImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_volume_on_80" />
+
     <ImageView
         android:id="@+id/painting_image"
         android:layout_width="480dp"
@@ -24,8 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/volumeImageButton"
         app:layout_constraintStart_toEndOf="@+id/painting_image"
         app:layout_constraintTop_toTopOf="@+id/painting_image">
 
@@ -112,7 +122,7 @@
     </TableLayout>
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/qrCodeImage"
         android:layout_width="170dp"
         android:layout_height="170dp"
         android:layout_marginEnd="10dp"
@@ -130,7 +140,7 @@
         android:text="@string/scan_qr"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintBottom_toTopOf="@+id/qrCodeImage"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button

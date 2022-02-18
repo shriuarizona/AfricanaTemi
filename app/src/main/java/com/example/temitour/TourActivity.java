@@ -18,6 +18,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -27,7 +28,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -60,6 +60,10 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
     private Button continueButton;
     /** Button to select a painting to go to */
     private Button selectButton;
+    /** Image button to toggle volume on/off */
+    private ImageButton volumeButton;
+    /** Whether or not the volume is on */
+    private boolean volumeIsOn = true;
 
     /** Random int generator */
     private Random rand = new Random();
@@ -84,8 +88,12 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
         selectButton.setOnClickListener((v) -> {
             userSelectPainting();
         });
-        //toolbar = findViewById(R.id.tour_toolbar);
-
+        volumeButton = findViewById(R.id.volumeImageButton);
+        volumeButton.setOnClickListener((v) -> {
+            volumeIsOn = !volumeIsOn;
+            applyVolumeSelection();
+        });
+        applyVolumeSelection();
     }
 
     @Override
@@ -107,6 +115,22 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Updates the volume button with image matching whether volume is on or off
+     */
+    private void applyVolumeSelection() {
+        // Update the volume button image
+        int imageId;
+        if (volumeIsOn) {
+            imageId = R.drawable.ic_baseline_volume_on_80;
+            Robot.getInstance().setVolume(VOLUME_LEVEL);
+        } else {
+            imageId = R.drawable.ic_baseline_volume_off_80;
+            Robot.getInstance().setVolume(0);
+        }
+        volumeButton.setImageDrawable(getResources().getDrawable(imageId, null));
     }
 
     /**
@@ -191,8 +215,7 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
      * Begins the Temi tour
      */
     private void beginTour() {
-        // Set volume and begin the tour
-        Robot.getInstance().setVolume(VOLUME_LEVEL);
+        // Begin the tour
         guideToPainting(0);
     }
 
