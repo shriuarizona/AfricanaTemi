@@ -7,17 +7,6 @@
     android:background="@drawable/sample_gradient">
 
     <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
-        android:maxWidth="180dp"
-        android:text="@string/scan_qr"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/qrCodeImage"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
         android:id="@+id/cultureWalkText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,16 +30,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/qrCodeImage"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:scaleType="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/art_gallery_qr_code" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
