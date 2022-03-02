@@ -18,8 +18,7 @@
             android:value="com.robotemi.permission.settings" />
 
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
