@@ -28,6 +28,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -60,6 +61,8 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
     private Button continueButton;
     /** Button to select a painting to go to */
     private Button selectButton;
+    /** Image holding QR code associated with the current painting */
+    private ImageView qrCodeImage;
     /** Image button to toggle volume on/off */
     private ImageButton volumeButton;
     /** Whether or not the volume is on */
@@ -83,12 +86,13 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
         mediumTextView = findViewById(R.id.medium_text);
         measurementsTextView = findViewById(R.id.measurements_text);
         descriptionTextView = findViewById(R.id.description_text);
-        continueButton = findViewById(R.id.continueButton);
-        selectButton = findViewById(R.id.selectButton);
+        qrCodeImage = findViewById(R.id.qr_code_image);
+        continueButton = findViewById(R.id.continue_button);
+        selectButton = findViewById(R.id.select_button);
         selectButton.setOnClickListener((v) -> {
             userSelectPainting();
         });
-        volumeButton = findViewById(R.id.volumeImageButton);
+        volumeButton = findViewById(R.id.volume_image_button);
         volumeButton.setOnClickListener((v) -> {
             volumeIsOn = !volumeIsOn;
             applyVolumeSelection();
@@ -130,7 +134,9 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
             imageId = R.drawable.ic_baseline_volume_off_80;
             Robot.getInstance().setVolume(0);
         }
-        volumeButton.setImageDrawable(getResources().getDrawable(imageId, null));
+
+        Drawable volumeIcon = ResourcesCompat.getDrawable(getResources(), imageId, null);
+        volumeButton.setImageDrawable(volumeIcon);
     }
 
     /**
@@ -232,7 +238,10 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
         Painting painting = paintings[i];
         updatePaintingInfo(painting);
 
-        // TODO: update the QR code to be a HoloX hologram of a curator talking about the artist (or painting)
+        // TODO: need actual resources to put in 'qrCode' field of Paintings
+        // Update the QR code for Hologram of curator talking about artist/painting
+        Drawable qrCode = ResourcesCompat.getDrawable(getResources(), painting.getQrCodeId(), null);
+        qrCodeImage.setImageDrawable(qrCode);
 
         // Update the Continue button
         if (i + 1 < paintings.length) {
@@ -321,7 +330,7 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
      * @return painting drawable image
      */
     private Drawable getPaintingImage(Painting p) {
-        return getResources().getDrawable(p.getImageId(), null);
+        return ResourcesCompat.getDrawable(getResources(), p.getImageId(), null);
     }
 
     /**
@@ -418,7 +427,7 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
          */
         public SelectPaintingDialogBuilder(@NonNull Context context) {
             super(context);
-            this.setTitle("Select Painting");
+            this.setTitle("Select painting to visit");
 
             // Create the Table of paintings
             TableLayout table = new TableLayout(context);
