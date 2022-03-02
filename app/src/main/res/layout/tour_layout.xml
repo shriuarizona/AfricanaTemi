@@ -7,7 +7,7 @@
     android:background="@drawable/sample_gradient">
 
     <ImageButton
-        android:id="@+id/volumeImageButton"
+        android:id="@+id/volume_image_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -15,7 +15,8 @@
         android:background="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_volume_on_80" />
+        app:srcCompat="@drawable/ic_baseline_volume_on_80"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageView
         android:id="@+id/painting_image"
@@ -35,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="40dp"
-        app:layout_constraintEnd_toStartOf="@+id/volumeImageButton"
+        app:layout_constraintEnd_toStartOf="@+id/volume_image_button"
         app:layout_constraintStart_toEndOf="@+id/painting_image"
         app:layout_constraintTop_toTopOf="@+id/painting_image">
 
@@ -122,7 +123,7 @@
     </TableLayout>
 
     <ImageView
-        android:id="@+id/qrCodeImage"
+        android:id="@+id/qr_code_image"
         android:layout_width="170dp"
         android:layout_height="170dp"
         android:layout_marginEnd="10dp"
@@ -140,11 +141,11 @@
         android:text="@string/scan_qr"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/qrCodeImage"
+        app:layout_constraintBottom_toTopOf="@+id/qr_code_image"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/selectButton"
+        android:id="@+id/select_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
@@ -163,7 +164,7 @@
         app:layout_constraintStart_toStartOf="@+id/painting_info_table" />
 
     <Button
-        android:id="@+id/continueButton"
+        android:id="@+id/continue_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -178,8 +179,8 @@
         android:textSize="40sp"
         android:textStyle="bold"
         app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/selectButton"
-        app:layout_constraintStart_toEndOf="@+id/selectButton"
-        app:layout_constraintTop_toTopOf="@+id/selectButton" />
+        app:layout_constraintBottom_toBottomOf="@+id/select_button"
+        app:layout_constraintStart_toEndOf="@+id/select_button"
+        app:layout_constraintTop_toTopOf="@+id/select_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
