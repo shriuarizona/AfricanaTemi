@@ -27,6 +27,8 @@ public class Painting {
     private String measurements;
     @SerializedName("description")
     private String description;
+    @SerializedName("qrCode")
+    private String qrCode;
 
     /**
      * Creates the painting
@@ -118,6 +120,19 @@ public class Painting {
             return field.getInt(field);
         } catch (Exception e) {
             throw new RuntimeException("Painting image resource not found for " + location);
+        }
+    }
+
+    /**
+     * Getter for the resource ID of the image drawable for the QR code
+     * @return drawable QR code image ID
+     */
+    public int getQrCodeId() {
+        try {
+            Field field = R.drawable.class.getDeclaredField(qrCode);
+            return field.getInt(field);
+        } catch (Exception e) {
+            throw new RuntimeException("");
         }
     }
 

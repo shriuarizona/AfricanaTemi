@@ -5,7 +5,8 @@
     "year": "Circa 1950",
     "medium": "Oil on canvas",
     "measurements": "30\" x 24\"",
-    "description": "New York City's lower Manhattan nocturnal skyline"
+    "description": "New York City's lower Manhattan nocturnal skyline",
+    "qrCode": "art_gallery_qr_code"
   },
   {
     "location": "painting01",
@@ -13,7 +14,8 @@
     "year": "",
     "medium": "Mixed media collage on canvas board (canvas wrapped hardboard)",
     "measurements": "Image 30\" x 24\", frame 34\" x 28\"",
-    "description": "Still life of sectioned watermelon on black and white checked tablecloth"
+    "description": "Still life of sectioned watermelon on black and white checked tablecloth",
+    "qrCode": ""
   },
   {
     "location": "painting02",
@@ -21,7 +23,8 @@
     "year": "",
     "medium": "Oil on canvas board (canvas wrapped cardboard)",
     "measurements": "12.5\" x 16\"",
-    "description": "Abstract image of a woman with a basket on her head"
+    "description": "Abstract image of a woman with a basket on her head",
+    "qrCode": ""
   },
   {
     "location": "painting03",
@@ -29,7 +32,8 @@
     "year": "",
     "medium": "Thick Impasto oil on board (cardboard)",
     "measurements": "12\" x 9.5\"",
-    "description": "French countryside at sunset, grassy meadow framed by trees on the right with sunset in the background"
+    "description": "French countryside at sunset, grassy meadow framed by trees on the right with sunset in the background",
+    "qrCode": ""
   },
   {
     "location": "painting04",
@@ -37,7 +41,8 @@
     "year": "",
     "medium": "Pastel on paper",
     "measurements": "Image 12\" x 16\", mat 16\" x 20\"",
-    "description": "Polychrome abstract geometric images"
+    "description": "Polychrome abstract geometric images",
+    "qrCode": ""
   },
   {
     "location": "painting05",
@@ -45,7 +50,8 @@
     "year": "",
     "medium": "Oil on canvas board",
     "measurements": "Image 14\" x 18\", frame 21\" x 17\"",
-    "description": "Bearded African American man in white shirt seated on the ground with head looking downward"
+    "description": "Bearded African American man in white shirt seated on the ground with head looking downward",
+    "qrCode": ""
   },
   {
     "location": "painting06",
@@ -53,7 +59,8 @@
     "year": "",
     "medium": "Impasto oil on canvas board (canvas lined cardboard)",
     "measurements": "20\" x 16\"",
-    "description": "Allegorical Figurative"
+    "description": "Allegorical Figurative",
+    "qrCode": ""
   },
   {
     "location": "painting07",
@@ -61,7 +68,8 @@
     "year": "",
     "medium": "Watercolor on paper",
     "measurements": "14\" x 9.5\"",
-    "description": "Tree framed African American Carolina town"
+    "description": "Tree framed African American Carolina town",
+    "qrCode": ""
   },
   {
     "location": "painting08",
@@ -69,7 +77,8 @@
     "year": "",
     "medium": "Oil on canvas board (canvas wrapped hardboard)",
     "measurements": "Image 13\" x 16\", frame 15.5\" x 18.5\"",
-    "description": "A view of New York City's cloudy west side Hudson River waterfront"
+    "description": "A view of New York City's cloudy west side Hudson River waterfront",
+    "qrCode": ""
   },
   {
     "location": "painting09",
@@ -77,6 +86,7 @@
     "year": "",
     "medium": "Pen and crayon on paper",
     "measurements": "10\" x 12\"",
-    "description": "Self portrait"
+    "description": "Self portrait",
+    "qrCode": ""
   }
 ]
