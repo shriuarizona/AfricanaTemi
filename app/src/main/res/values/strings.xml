@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">Temi Tour</string>
-    <string name="tour">Tour</string>
-    <string name="survey">Survey</string>
+
+    <!-- Button names -->
     <string name="culture_walk">Culture Walk</string>
+    <string name="locate_office">Locate Office</string>
+    <string name="courses">Africana Courses</string>
+    <string name="events">Africana Events</string>
+    <string name="leave_message">Leave Message</string>
+
+    <string name="survey">Survey</string>
     <string name="presented_by">Presented by the Center for Digital Humanities</string>
     <string name="cancel">Cancel</string>
     <string name="begin">Begin</string>
@@ -22,6 +28,7 @@
     <string name="finish_tour">Finish</string>
     <string name="tour_title">Culture Walk</string>
     <string name="survey_title">"Tour Survey"</string>
+    <string name="events_title">Africana Studies Events</string>
     <string name="survey_submitted">Survey response submitted</string>
     <string name="tour_info">This tour will walk you through the various paintings in this hall.</string>
 </resources>

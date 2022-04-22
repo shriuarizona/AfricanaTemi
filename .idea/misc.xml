@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/drawable/ic_baseline_volume_on_24.xml" value="0.188" />
+        <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/activity_dashboard.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/activity_events.xml" value="0.134765625" />
         <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/activity_survey.xml" value="0.134765625" />
         <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/activity_tour.xml" value="0.134765625" />

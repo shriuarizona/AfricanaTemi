@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/starnight"
+    tools:context=".MainActivity">
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <Button
+                android:id="@+id/tour_button"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_margin="45dp"
+                android:backgroundTint="@color/purple_200"
+                android:text="@string/culture_walk"
+                android:textAllCaps="false"
+                android:textSize="32dp"
+                app:cornerRadius="30dp"
+                tools:ignore="InvalidId" />
+
+            <Button
+                android:id="@+id/locate_office_button"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_margin="45dp"
+                android:backgroundTint="@color/purple_200"
+                android:text="@string/locate_office"
+                android:textAllCaps="false"
+                android:textSize="32dp"
+                app:cornerRadius="30dp" />
+
+            <Button
+                android:id="@+id/courses_button"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_margin="45dp"
+                android:backgroundTint="@color/purple_200"
+                android:text="@string/courses"
+                android:textAllCaps="false"
+                android:textSize="32dp"
+                app:cornerRadius="30dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <Button
+                android:id="@+id/events_button"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_margin="45dp"
+                android:backgroundTint="@color/purple_200"
+                android:text="@string/events"
+                android:textAllCaps="false"
+                android:textSize="32dp"
+                app:cornerRadius="30dp"
+                tools:ignore="InvalidId" />
+
+            <Button
+                android:id="@+id/leave_message_button"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_margin="45dp"
+                android:backgroundTint="@color/purple_200"
+                android:text="@string/leave_message"
+                android:textAllCaps="false"
+                android:textSize="32dp"
+                app:cornerRadius="30dp"
+                tools:ignore="InvalidId" />
+        </TableRow>
+
+    </TableLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -239,9 +239,12 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
         updatePaintingInfo(painting);
 
         // TODO: need actual resources to put in 'qrCode' field of Paintings
+        // Uncomment the qrCode lines once `qrCode` in each paintings.json Painting
+        // maps to a valid QR code
+
         // Update the QR code for Hologram of curator talking about artist/painting
-        Drawable qrCode = ResourcesCompat.getDrawable(getResources(), painting.getQrCodeId(), null);
-        qrCodeImage.setImageDrawable(qrCode);
+//        Drawable qrCode = ResourcesCompat.getDrawable(getResources(), painting.getQrCodeId(), null);
+//        qrCodeImage.setImageDrawable(qrCode);
 
         // Update the Continue button
         if (i + 1 < paintings.length) {
@@ -264,7 +267,7 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
 
         // Take the user to the painting
         // TODO: go to the location (uncomment below line)
-        // Robot.getInstance().goTo(painting.getLocation());
+//         Robot.getInstance().goTo(painting.getLocation());
 
         Robot.getInstance().speak(TtsRequest.create(
                 getTextToSpeak(painting), false, TtsRequest.Language.EN_US));
