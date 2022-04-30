@@ -30,6 +30,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
+import com.example.temitour.paintings.Artist;
+import com.example.temitour.paintings.Painting;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import com.robotemi.sdk.Robot;

@@ -32,17 +32,6 @@
                 tools:ignore="InvalidId" />
 
             <Button
-                android:id="@+id/locate_office_button"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_margin="45dp"
-                android:backgroundTint="@color/purple_200"
-                android:text="@string/locate_office"
-                android:textAllCaps="false"
-                android:textSize="32dp"
-                app:cornerRadius="30dp" />
-
-            <Button
                 android:id="@+id/courses_button"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
@@ -52,11 +41,6 @@
                 android:textAllCaps="false"
                 android:textSize="32dp"
                 app:cornerRadius="30dp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
 
             <Button
                 android:id="@+id/events_button"
@@ -69,14 +53,42 @@
                 android:textSize="32dp"
                 app:cornerRadius="30dp"
                 tools:ignore="InvalidId" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
 
             <Button
-                android:id="@+id/leave_message_button"
+                android:id="@+id/professors_button"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_margin="45dp"
                 android:backgroundTint="@color/purple_200"
-                android:text="@string/leave_message"
+                android:text="Professors"
+                android:textAllCaps="false"
+                android:textSize="32dp"
+                app:cornerRadius="30dp" />
+
+            <Button
+                android:id="@+id/alumni_button"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_margin="45dp"
+                android:backgroundTint="@color/purple_200"
+                android:text="Alumni"
+                android:textAllCaps="false"
+                android:textSize="32dp"
+                app:cornerRadius="30dp"
+                tools:ignore="InvalidId" />
+
+            <Button
+                android:id="@+id/leave_feedback_button"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_margin="45dp"
+                android:backgroundTint="@color/purple_200"
+                android:text="Leave Feedback"
                 android:textAllCaps="false"
                 android:textSize="32dp"
                 app:cornerRadius="30dp"

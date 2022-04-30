@@ -1,6 +1,5 @@
 package com.example.temitour;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -14,14 +13,16 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
 
     /** Button for taking the tour */
     private Button tourButton;
-    /** Button for locating a professor's office */
-    private Button locateOfficeButton;
     /** Button to view Africana Studies courses */
     private Button coursesButton;
     /** Button for Africana Studies events */
     private Button eventsButton;
-    /** Button for leaving a message to a professor */
-    private Button leaveMessageButton;
+    /** Button for Africana Studies professors */
+    private Button professorsButton;
+    /** Button for Africana Studies alumni */
+    private Button alumniButton;
+    /** Button for leaving feedback on the app */
+    private Button leaveFeedbackButton;
     /** Button for taking the survey */
     private Button surveyButton;
 
@@ -36,12 +37,6 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
             openActivity(TourActivity.class);
         });
 
-        // Locate office button
-        locateOfficeButton = findViewById(R.id.locate_office_button);
-        locateOfficeButton.setOnClickListener((v) -> {
-            openActivity(LocateOfficeActivity.class);
-        });
-
         // Africana Studies courses button
         coursesButton = findViewById(R.id.courses_button);
         coursesButton.setOnClickListener((v) -> {
@@ -54,10 +49,21 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
             openActivity(EventsActivity.class);
         });
 
-        // Leave message button
-        leaveMessageButton = findViewById(R.id.leave_message_button);
-        leaveMessageButton.setOnClickListener((v) -> {
-            openActivity(LeaveMessageActivity.class);
+        // Professors button
+        professorsButton = findViewById(R.id.professors_button);
+        professorsButton.setOnClickListener((v) -> {
+            openActivity(ProfessorsActivity.class);
+        });
+
+        // Alumni button
+        alumniButton = findViewById(R.id.alumni_button);
+        alumniButton.setOnClickListener((v) -> {
+            openActivity(AlumniActivity.class);
+        });
+
+        leaveFeedbackButton = findViewById(R.id.leave_feedback_button);
+        leaveFeedbackButton.setOnClickListener((v) -> {
+            openActivity(FeedbackActivity.class);
         });
 
 //        // Survey button

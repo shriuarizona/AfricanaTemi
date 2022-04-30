@@ -29,6 +29,10 @@
     <string name="tour_title">Culture Walk</string>
     <string name="survey_title">"Tour Survey"</string>
     <string name="events_title">Africana Studies Events</string>
+    <string name="courses_title">Africana Studies Courses</string>
     <string name="survey_submitted">Survey response submitted</string>
     <string name="tour_info">This tour will walk you through the various paintings in this hall.</string>
+    <string name="event_load_fail">Failed to load events.</string>
+    <string name="alumni">Alumni</string>
+    <string name="professors">Professors</string>
 </resources>

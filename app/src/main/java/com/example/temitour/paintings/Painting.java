@@ -1,8 +1,6 @@
-package com.example.temitour;
+package com.example.temitour.paintings;
 
-import android.graphics.drawable.Drawable;
-
-import com.google.gson.Gson;
+import com.example.temitour.R;
 import com.google.gson.annotations.SerializedName;
 
 import java.lang.reflect.Field;
@@ -152,7 +150,7 @@ public class Painting {
     /**
      * Thrown if an invalid artist is provided
      */
-    class InvalidArtistException extends Exception {
+    public static class InvalidArtistException extends Exception {
         public InvalidArtistException(String message) {
             super(message);
         }

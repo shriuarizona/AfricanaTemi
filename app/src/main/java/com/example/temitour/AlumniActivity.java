@@ -6,26 +6,26 @@ import android.webkit.WebView;
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
- * This class represents the activity for showing the user Africana Studies courses
+ * This class represents the activity for showing the user the Africana Studies alumni
  */
-public class CoursesActivity extends AppCompatActivity {
+public class AlumniActivity extends AppCompatActivity {
 
-    /** WebView for accessing the courses site */
+    /** WebView for accessing the alumni site */
     private WebView webView;
 
     /** Africana Studies courses URL */
-    private static final String COURSES_URL = "https://africana.arizona.edu/undergraduate/current-students/course-schedule";
+    private static final String ALUMNI_URL = "https://africana.arizona.edu/people/alumni";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle(R.string.courses);
+        setTitle(R.string.alumni);
         setContentView(R.layout.web_activity);
 
-        // Navigate to the courses webpage
+        // Navigate to the alumni webpage
         webView = findViewById(R.id.webview);
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl(COURSES_URL);
+        webView.loadUrl(ALUMNI_URL);
     }
 
     @Override

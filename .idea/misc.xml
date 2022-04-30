@@ -4,17 +4,22 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/drawable/ic_baseline_volume_on_24.xml" value="0.188" />
+        <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/activity_courses.xml" value="0.22" />
         <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/activity_dashboard.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/activity_events.xml" value="0.134765625" />
+        <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/activity_event.xml" value="0.12421875" />
+        <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/activity_events.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/activity_feedback.xml" value="0.12421875" />
         <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/activity_survey.xml" value="0.134765625" />
         <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/activity_tour.xml" value="0.134765625" />
         <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/activity_tour_intro.xml" value="0.12" />
         <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/crossfade_layout.xml" value="0.134765625" />
+        <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/event_container.xml" value="0.1" />
         <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/layout.xml" value="0.134765625" />
         <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/select_layout.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/tour_layout.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/tour_start_layout.xml" value="0.134765625" />
+        <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/layout/web_activity.xml" value="0.134765625" />
         <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/menu/menu_main.xml" value="0.134765625" />
         <entry key="..\:/Users/Gavin/AndroidStudioProjects/TemiTour/app/src/main/res/menu/menu_tour.xml" value="0.1" />
       </map>

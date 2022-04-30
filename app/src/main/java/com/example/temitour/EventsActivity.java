@@ -1,47 +1,94 @@
 package com.example.temitour;
 
-import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
+import android.util.TypedValue;
+import android.view.LayoutInflater;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.Space;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.example.temitour.scrape.EventsScraper;
+import com.example.temitour.scrape.EventsScraper.AfricanaEvent;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class EventsActivity extends AppCompatActivity {
 
+    /** WebView for accessing the events site */
+    private WebView webView;
+
+    /** Main constraint layout for the activity */
+    private ConstraintLayout mainLayout;
     /** Container for the events */
-    private LinearLayout eventContainer;
-    /** URL to scrape Africana Studies events from */
-    private static final String EVENTS_URL = "https://africana.arizona.edu/events";
+    private LinearLayout eventsContainer;
+    /** Loading bar while it loads events */
+    private ProgressBar eventsProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle(R.string.events_title);
-        setContentView(R.layout.activity_events);
-        eventContainer = findViewById(R.id.event_container);
-        try {
-            List<AfricanaEvent> events = new EventLoaderTask().execute().get();
-            for (AfricanaEvent event : events) {
-                addEvent(event);
-            }
-        } catch (ExecutionException|InterruptedException e) {
+//        setContentView(R.layout.activity_events);
+        setContentView(R.layout.web_activity);
+
+        // Navigate to the Events website
+        webView = findViewById(R.id.webview);
+        webView.getSettings().setJavaScriptEnabled(true);   // Need JavaScript for Google forms
+        webView.loadUrl("https://africana.arizona.edu/events");
+
+//        mainLayout = findViewById(R.id.webview);
+//        eventsContainer = findViewById(R.id.events_container);
+//        eventsContainer.removeAllViews();
+//        eventsProgressBar = findViewById(R.id.events_progress);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (webView != null && webView.canGoBack()) {
+            // Go back if there is a previous page
+            webView.goBack();
+        } else {
+            // No previous page; close the app
+            super.onBackPressed();
         }
+    }
+
+
+    protected void onStart() {
+        super.onStart();
+
+        // TODO: can remove this if the Events website works better
+        // TODO: useful for understanding how to asynchonously load from HTTP request
+//        // Load the events from Africana Studies in background
+//        TourApplication app = (TourApplication) getApplication();
+//        app.executorService.execute(() -> {
+//            try {
+//                List<AfricanaEvent> events = EventsScraper.loadEvents();
+//                runOnUiThread(() -> {
+//                    // Loaded events successfully; display them
+//                    mainLayout.removeView(eventsProgressBar);
+//                    for (AfricanaEvent event : events) {
+//                        addEvent(event);
+//                    }
+//                });
+//            } catch (IOException e) {
+//                // Failed to load events
+//                runOnUiThread(() -> {
+//                    mainLayout.removeView(eventsProgressBar);
+//                    TextView failText = new TextView(EventsActivity.this);
+//                    failText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+//                    failText.setText(R.string.event_load_fail);
+//                    eventsContainer.addView(failText);
+//                });
+//            }
+//        });
     }
 
     /**
@@ -49,110 +96,33 @@ public class EventsActivity extends AppCompatActivity {
      * @param event is the Africana Studies event to add
      */
     private void addEvent(AfricanaEvent event) {
-        TextView title = new TextView(this);
-        title.setText(event.title);
-        eventContainer.addView(title);
+        // Inflate the event container
+        LayoutInflater inflater = getLayoutInflater();
+        ConstraintLayout eventContainer = (ConstraintLayout) inflater.inflate(R.layout.event_container, null);
 
-        TextView desc = new TextView(this);
-        desc.setText(event.description);
-        eventContainer.addView(desc);
-
-        TextView date = new TextView(this);
-        date.setText(event.date);
-        eventContainer.addView(date);
-
+        // Replace image
         if (event.image != null) {
-            ImageView image = new ImageView(this);
+            ImageView image = (ImageView) eventContainer.getChildAt(0);
             image.setImageDrawable(event.image);
-            eventContainer.addView(image);
-        }
-    }
-
-    /**
-     * This class represents an upcoming event for Africana Studies
-     */
-    private static class AfricanaEvent {
-
-        /** Event title */
-        private String title;
-        /** Event description */
-        private String description;
-        /** Event date */
-        private String date;
-        /** Drawable image for event */
-        private Drawable image;
-
-        /**
-         * Constructs a new Africana event
-         * @param title is the event title
-         * @param description is the event description
-         * @param date is the event date
-         * @param image is the Drawable image for the event
-         */
-        public AfricanaEvent(String title, String description, String date, Drawable image) {
-            this.title = title;
-            this.description = description;
-            this.date = date;
-            this.image = image;
-        }
-    }
-
-    /**
-     * Asynchronous task to load all the events for Africana Studies
-     */
-    private static class EventLoaderTask extends AsyncTask<Void, Void, List<AfricanaEvent>> {
-
-        @Override
-        protected List<AfricanaEvent> doInBackground(Void... voids) {
-            try {
-                return parseEvents();
-            } catch (IOException e) {
-                return null;
-            }
         }
 
-        /**
-         * Parses each event from the Africana Studies website
-         * @return list of upcoming events
-         * @throws IOException if HTTP connection fails
-         */
-        private List<AfricanaEvent> parseEvents() throws IOException {
-            List<AfricanaEvent> events = new ArrayList<>();
-            Document doc = Jsoup.connect(EVENTS_URL).get();
-            Elements viewContents = doc.getElementsByClass("view-content");
-            for (Element viewContent : viewContents) {
-                // Parse each event element from the view-content <div>
-                for (Element eventEl : viewContent.children()) {
-                    events.add(parseEvent(eventEl));
-                }
-            }
-            return events;
-        }
+        // Replace the title
+        TextView title = (TextView) eventContainer.getChildAt(1);
+        title.setText(event.title);
 
-        /**
-         * Parses the given event element from the Africana Studies page
-         * @param eventEl is the element to get the event information from
-         * @return Africana Studies event
-         */
-        private AfricanaEvent parseEvent(Element eventEl) {
-            // Get the text fields
-            String date = eventEl.selectXpath("//div[1]/span").text();
-            String title = eventEl.selectXpath("//div[2]/div[1]").text();
-            String description = eventEl.selectXpath("//div[2]/div[2]").text();
+        // Replace the date
+        TextView date = (TextView) eventContainer.getChildAt(2);
+        date.setText(event.date);
 
-            // Load the image
-            String imageSrc = eventEl.selectXpath("//div[1]/*/img").attr("src");
-            Drawable image;
-            try {
-                InputStream is = (InputStream) new URL(imageSrc).getContent();
-                image = Drawable.createFromStream(is, "src name");
-            } catch (IOException e) {
-                Log.e("abcdefg", Log.getStackTraceString(e));
-                image = null;
-            }
+        // Replace the description
+        TextView desc = (TextView) eventContainer.getChildAt(3);
+        desc.setText(event.description);
 
-            return new AfricanaEvent(title, description, date, image);
-        }
+        // Add the event + space below to the view
+        eventsContainer.addView(eventContainer);
+        Space s = new Space(this);
+        s.setMinimumHeight(AppUtils.dpToPx(getResources(), 40));
+        eventsContainer.addView(s);
     }
 
 }

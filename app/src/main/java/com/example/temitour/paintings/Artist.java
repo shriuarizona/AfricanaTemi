@@ -1,4 +1,4 @@
-package com.example.temitour;
+package com.example.temitour.paintings;
 
 import com.google.gson.annotations.SerializedName;
 
