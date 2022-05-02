@@ -1,9 +1,15 @@
 package com.example.temitour;
 
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.webkit.WebView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.temitour.scrape.EventsScraper;
+
+import java.io.IOException;
 
 /**
  * This class represents the activity for showing the user the Africana Studies professors
@@ -13,7 +19,7 @@ public class ProfessorsActivity extends AppCompatActivity {
     /** WebView for accessing the professors site */
     private WebView webView;
 
-    /** Africana Studies courses URL */
+    /** Africana Studies professors URL */
     private static final String PROFESSORS_URL = "https://africana.arizona.edu/people/faculty";
 
     @Override
@@ -28,15 +34,34 @@ public class ProfessorsActivity extends AppCompatActivity {
         webView.loadUrl(PROFESSORS_URL);
     }
 
-    @Override
-    public void onBackPressed() {
-        if(webView != null && webView.canGoBack()) {
-            // Go back if there is a previous page
-            webView.goBack();
-        } else {
-            // No previous page; close the app
-            super.onBackPressed();
-        }
-    }
+//    protected void onStart() {
+//        super.onStart();
+//
+//        // TODO: can remove this if the Events website works better
+//        // TODO: useful for understanding how to asynchonously load from HTTP request
+//        // Load the professors from Africana Studies in background
+//        TourApplication app = (TourApplication) getApplication();
+//        app.executorService.execute(() -> {
+//            try {
+//                List<AfricanaEvent> events = EventsScraper.loadEvents();
+//                runOnUiThread(() -> {
+//                    // Loaded events successfully; display them
+//                    mainLayout.removeView(eventsProgressBar);
+//                    for (AfricanaEvent event : events) {
+//                        addEvent(event);
+//                    }
+//                });
+//            } catch (IOException e) {
+//                // Failed to load events
+//                runOnUiThread(() -> {
+//                    mainLayout.removeView(eventsProgressBar);
+//                    TextView failText = new TextView(EventsActivity.this);
+//                    failText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+//                    failText.setText(R.string.event_load_fail);
+//                    eventsContainer.addView(failText);
+//                });
+//            }
+//        });
+//    }
 
 }

@@ -24,42 +24,20 @@ public class EventsActivity extends AppCompatActivity {
     /** WebView for accessing the events site */
     private WebView webView;
 
-    /** Main constraint layout for the activity */
-    private ConstraintLayout mainLayout;
-    /** Container for the events */
-    private LinearLayout eventsContainer;
-    /** Loading bar while it loads events */
-    private ProgressBar eventsProgressBar;
+    /** Africana Studies events URL */
+    private static final String EVENTS_URL = "https://africana.arizona.edu/events";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle(R.string.events_title);
-//        setContentView(R.layout.activity_events);
         setContentView(R.layout.web_activity);
 
         // Navigate to the Events website
         webView = findViewById(R.id.webview);
         webView.getSettings().setJavaScriptEnabled(true);   // Need JavaScript for Google forms
-        webView.loadUrl("https://africana.arizona.edu/events");
-
-//        mainLayout = findViewById(R.id.webview);
-//        eventsContainer = findViewById(R.id.events_container);
-//        eventsContainer.removeAllViews();
-//        eventsProgressBar = findViewById(R.id.events_progress);
+        webView.loadUrl(EVENTS_URL);
     }
-
-    @Override
-    public void onBackPressed() {
-        if (webView != null && webView.canGoBack()) {
-            // Go back if there is a previous page
-            webView.goBack();
-        } else {
-            // No previous page; close the app
-            super.onBackPressed();
-        }
-    }
-
 
     protected void onStart() {
         super.onStart();
@@ -95,34 +73,34 @@ public class EventsActivity extends AppCompatActivity {
      * Adds an event to the container displaying
      * @param event is the Africana Studies event to add
      */
-    private void addEvent(AfricanaEvent event) {
-        // Inflate the event container
-        LayoutInflater inflater = getLayoutInflater();
-        ConstraintLayout eventContainer = (ConstraintLayout) inflater.inflate(R.layout.event_container, null);
-
-        // Replace image
-        if (event.image != null) {
-            ImageView image = (ImageView) eventContainer.getChildAt(0);
-            image.setImageDrawable(event.image);
-        }
-
-        // Replace the title
-        TextView title = (TextView) eventContainer.getChildAt(1);
-        title.setText(event.title);
-
-        // Replace the date
-        TextView date = (TextView) eventContainer.getChildAt(2);
-        date.setText(event.date);
-
-        // Replace the description
-        TextView desc = (TextView) eventContainer.getChildAt(3);
-        desc.setText(event.description);
-
-        // Add the event + space below to the view
-        eventsContainer.addView(eventContainer);
-        Space s = new Space(this);
-        s.setMinimumHeight(AppUtils.dpToPx(getResources(), 40));
-        eventsContainer.addView(s);
-    }
+//    private void addEvent(AfricanaEvent event) {
+//        // Inflate the event container
+//        LayoutInflater inflater = getLayoutInflater();
+//        ConstraintLayout eventContainer = (ConstraintLayout) inflater.inflate(R.layout.event_container, null);
+//
+//        // Replace image
+//        if (event.image != null) {
+//            ImageView image = (ImageView) eventContainer.getChildAt(0);
+//            image.setImageDrawable(event.image);
+//        }
+//
+//        // Replace the title
+//        TextView title = (TextView) eventContainer.getChildAt(1);
+//        title.setText(event.title);
+//
+//        // Replace the date
+//        TextView date = (TextView) eventContainer.getChildAt(2);
+//        date.setText(event.date);
+//
+//        // Replace the description
+//        TextView desc = (TextView) eventContainer.getChildAt(3);
+//        desc.setText(event.description);
+//
+//        // Add the event + space below to the view
+//        eventsContainer.addView(eventContainer);
+//        Space s = new Space(this);
+//        s.setMinimumHeight(AppUtils.dpToPx(getResources(), 40));
+//        eventsContainer.addView(s);
+//    }
 
 }

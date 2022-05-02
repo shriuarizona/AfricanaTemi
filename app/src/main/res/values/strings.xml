@@ -35,4 +35,7 @@
     <string name="event_load_fail">Failed to load events.</string>
     <string name="alumni">Alumni</string>
     <string name="professors">Professors</string>
+    <string name="news">News</string>
+    <string name="info">Info</string>
+    <string name="feedback">Feedback</string>
 </resources>

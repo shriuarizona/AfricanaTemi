@@ -12,15 +12,20 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class FeedbackActivity extends AppCompatActivity {
 
+    /** WebView for accessing the feedback Google Form */
+    private WebView webView;
+
+    /** Feedback Google Form URL */
     private static final String FEEDBACK_URL = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle(R.string.feedback);
         setContentView(R.layout.web_activity);
 
         // Navigate to the feedback Google Form
-        WebView webView = findViewById(R.id.webview);
+        webView = findViewById(R.id.webview);
         webView.getSettings().setJavaScriptEnabled(true);   // Need JavaScript for Google forms
         webView.loadUrl(FEEDBACK_URL);
     }

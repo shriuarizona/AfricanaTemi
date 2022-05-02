@@ -21,15 +21,17 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
     private Button professorsButton;
     /** Button for Africana Studies alumni */
     private Button alumniButton;
+    /** Button for Africana Studies news */
+    private Button newsButton;
+    /** Button for info about Africana Studies */
+    private Button infoButton;
     /** Button for leaving feedback on the app */
     private Button leaveFeedbackButton;
-    /** Button for taking the survey */
-    private Button surveyButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
+        setContentView(R.layout.activity_main);
 
         // Tour button
         tourButton = findViewById(R.id.tour_button);
@@ -61,17 +63,21 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
             openActivity(AlumniActivity.class);
         });
 
+        // News button
+        newsButton = findViewById(R.id.news_button);
+        newsButton.setOnClickListener((v) -> {
+            openActivity(NewsActivity.class);
+        });
+
+        infoButton = findViewById(R.id.info_button);
+        infoButton.setOnClickListener((v) -> {
+            openActivity(InfoActivity.class);
+        });
+
         leaveFeedbackButton = findViewById(R.id.leave_feedback_button);
         leaveFeedbackButton.setOnClickListener((v) -> {
             openActivity(FeedbackActivity.class);
         });
-
-//        // Survey button
-//        surveyButton = findViewById(R.id.survey_button);
-//        surveyButton.setOnClickListener((v) -> {
-//               openActivity(SurveyActivity.class);
-//            }
-//        );
     }
 
     @Override

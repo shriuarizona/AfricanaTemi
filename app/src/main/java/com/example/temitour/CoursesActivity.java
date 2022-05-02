@@ -28,15 +28,4 @@ public class CoursesActivity extends AppCompatActivity {
         webView.loadUrl(COURSES_URL);
     }
 
-    @Override
-    public void onBackPressed() {
-        if (webView != null && webView.canGoBack()) {
-            // Go back if there is a previous page
-            webView.goBack();
-        } else {
-            // No previous page; close the app
-            super.onBackPressed();
-        }
-    }
-
 }
