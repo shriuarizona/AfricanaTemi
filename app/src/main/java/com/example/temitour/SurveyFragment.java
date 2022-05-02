@@ -2,6 +2,12 @@ package com.example.temitour;
 
 import androidx.fragment.app.Fragment;
 
+/**
+ * This class represents a single question fragment in the tour survey
+ *
+ * @author Gavin Vogt
+ */
+// TODO: delete SurveyFragment now that the tour survey uses Google Forms instead
 public class SurveyFragment extends Fragment {
 
     private static int fragmentId = R.layout.survey_fragment_2;

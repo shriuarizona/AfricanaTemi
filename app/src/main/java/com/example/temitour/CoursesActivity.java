@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * This class represents the activity for showing the user Africana Studies courses
+ *
+ * @author Gavin Vogt
  */
 public class CoursesActivity extends AppCompatActivity {
 

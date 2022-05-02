@@ -14,7 +14,10 @@ import org.jetbrains.annotations.NotNull;
  * This class creates a custom EditText that tells the soft keyboard to have no ENTER action.
  * This allows a multiline text input to actually be closed (provides the checkmark to close
  * the keyboard rather than the enter button)
+ *
+ * @author Gavin Vogt
  */
+// TODO: delete the CustomEditText class now that we are using Google Forms for the tour survey
 public class CustomEditText extends com.google.android.material.textfield.TextInputEditText {
     public CustomEditText(@NonNull @NotNull Context context) {
         super(context);

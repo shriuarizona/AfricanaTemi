@@ -9,6 +9,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.robotemi.sdk.Robot;
 import com.robotemi.sdk.listeners.OnRobotReadyListener;
 
+/**
+ * This class represents the main dashboard activity for the Africana Studies app
+ *
+ * @author Gavin Vogt
+ */
 public class MainActivity extends AppCompatActivity implements OnRobotReadyListener {
 
     /** Button for taking the tour */

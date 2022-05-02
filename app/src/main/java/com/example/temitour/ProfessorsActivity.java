@@ -13,6 +13,8 @@ import java.io.IOException;
 
 /**
  * This class represents the activity for showing the user the Africana Studies professors
+ *
+ * @author Gavin Vogt
  */
 public class ProfessorsActivity extends AppCompatActivity {
 

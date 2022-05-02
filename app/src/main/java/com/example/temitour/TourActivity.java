@@ -43,6 +43,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * This class represents the Culture Walk activity
+ *
+ * @author Gavin Vogt
+ */
 public class TourActivity extends AppCompatActivity implements OnRobotReadyListener {
 
     /** This array of paintings to tour */
@@ -397,7 +402,7 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
                 public void onClick(DialogInterface dialog, int which) {
                     // Take the user to the survey
                     finish();
-                    Intent intent = new Intent(getApplicationContext(), SurveyActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), TourSurveyActivity.class);
                     startActivity(intent);
                 }
             });
@@ -433,6 +438,8 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
         public SelectPaintingDialogBuilder(@NonNull Context context) {
             super(context);
             this.setTitle("Select painting to visit");
+
+            // TODO: convert to a layout to inflate?
 
             // Create the Table of paintings
             TableLayout table = new TableLayout(context);

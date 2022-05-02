@@ -30,7 +30,7 @@
         <activity android:name=".TourActivity"
             android:parentActivityName=".MainActivity" />
 
-        <activity android:name=".SurveyActivity"
+        <activity android:name=".TourSurveyActivity"
             android:parentActivityName=".MainActivity" />
 
         <activity android:name=".CoursesActivity"

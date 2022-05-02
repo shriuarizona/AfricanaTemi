@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 /**
  * This class represents the activity for getting general feedback on the app
  * from the user
+ *
+ * @author Gavin Vogt
  */
 public class FeedbackActivity extends AppCompatActivity {
 
@@ -16,7 +18,7 @@ public class FeedbackActivity extends AppCompatActivity {
     private WebView webView;
 
     /** Feedback Google Form URL */
-    private static final String FEEDBACK_URL = "";
+    private static final String FEEDBACK_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdRo5aTC4bZC1f-Z0A5xSWc2XNhUZdYu1oBQeXbC-tdm8JmAw/viewform";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

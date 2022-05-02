@@ -19,6 +19,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * This class represents the activity for showing the user Africana Studies events
+ *
+ * @author Gavin Vogt
+ */
 public class EventsActivity extends AppCompatActivity {
 
     /** WebView for accessing the events site */

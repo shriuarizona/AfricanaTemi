@@ -5,6 +5,11 @@ import android.webkit.WebView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * This class represents the activity for showing the user Africana Studies info
+ *
+ * @author Gavin Vogt
+ */
 public class InfoActivity extends AppCompatActivity {
 
     /** WebView for accessing the info site */
