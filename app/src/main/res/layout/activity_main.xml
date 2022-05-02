@@ -21,27 +21,36 @@
 
             <Button
                 android:id="@+id/tour_button"
+                style="@style/dashboard_button"
+                android:backgroundTint="#71C374"
                 android:text="@string/culture_walk"
                 app:cornerRadius="30dp"
-                style="@style/dashboard_button" />
+                app:strokeColor="#1D8121"
+                app:strokeWidth="3dp" />
 
             <Button
                 android:id="@+id/courses_button"
+                style="@style/dashboard_button"
                 android:text="@string/courses"
                 app:cornerRadius="30dp"
-                style="@style/dashboard_button" />
+                app:strokeColor="#6E37CF"
+                app:strokeWidth="3dp" />
 
             <Button
                 android:id="@+id/events_button"
+                style="@style/dashboard_button"
                 android:text="@string/events"
                 app:cornerRadius="30dp"
-                style="@style/dashboard_button" />
+                app:strokeColor="#6E37CF"
+                app:strokeWidth="3dp" />
 
             <Button
                 android:id="@+id/info_button"
                 style="@style/dashboard_button"
                 android:text="@string/info"
-                app:cornerRadius="30dp" />
+                app:cornerRadius="30dp"
+                app:strokeColor="#6E37CF"
+                app:strokeWidth="3dp" />
         </TableRow>
 
         <TableRow
@@ -52,25 +61,33 @@
                 android:id="@+id/professors_button"
                 style="@style/dashboard_button"
                 android:text="@string/professors"
-                app:cornerRadius="30dp" />
+                app:cornerRadius="30dp"
+                app:strokeColor="#6E37CF"
+                app:strokeWidth="3dp" />
 
             <Button
                 android:id="@+id/alumni_button"
                 style="@style/dashboard_button"
                 android:text="@string/alumni"
-                app:cornerRadius="30dp" />
+                app:cornerRadius="30dp"
+                app:strokeColor="#6E37CF"
+                app:strokeWidth="3dp" />
 
             <Button
                 android:id="@+id/news_button"
                 style="@style/dashboard_button"
                 android:text="@string/news"
-                app:cornerRadius="30dp" />
+                app:cornerRadius="30dp"
+                app:strokeColor="#6E37CF"
+                app:strokeWidth="3dp" />
 
             <Button
                 android:id="@+id/leave_feedback_button"
+                style="@style/dashboard_button"
                 android:text="Leave Feedback"
                 app:cornerRadius="30dp"
-                style="@style/dashboard_button" />
+                app:strokeColor="#6E37CF"
+                app:strokeWidth="3dp" />
 
         </TableRow>
 
