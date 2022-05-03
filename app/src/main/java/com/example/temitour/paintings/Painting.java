@@ -27,6 +27,8 @@ public class Painting {
     private String description;
     @SerializedName("qrCode")
     private String qrCode;
+    @SerializedName("altLocation")
+    private String alternateLocation;
 
     /**
      * Creates the painting
@@ -36,15 +38,19 @@ public class Painting {
      * @param medium is the medium on which the painting was created
      * @param measurements are the measurements of the painting
      * @param description is the description of the painting
+     * @param qrCode is the name of the QR code file
+     * @param alternateLocation is the name of alternate location to go to, or null if irrelevant
      */
     public Painting(String location, int artistId, String year, String medium, String measurements,
-                    String description) {
+                    String description, String qrCode, String alternateLocation) {
         this.location = location;
         this.artistId = artistId;
         this.year = year;
         this.medium = medium;
         this.measurements = measurements;
         this.description = description;
+        this.qrCode = qrCode;
+        this.alternateLocation = alternateLocation;
     }
 
     /**
@@ -101,11 +107,15 @@ public class Painting {
     }
 
     /**
-     * Getter for the string representing the name of the location on Temi's map
+     * Getter for the string representing the name of the location on Temi's map.
+     * Uses the alternate location if it is not null (such as "painting1 and painting2"),
+     * assuming it to represent a more optimal location to use in the physical tour. This
+     * would be if paintings 1 and 2 are directly adjacent, so it would be optimal for
+     * Temi to stand in the middle for both instead of having to move.
      * @return name of the location
      */
     public String getLocation() {
-        return location;
+        return (alternateLocation == null) ? location : alternateLocation;
     }
 
     /**
