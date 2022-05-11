@@ -75,6 +75,8 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
     private ImageButton volumeButton;
     /** Whether or not the volume is on */
     private boolean volumeIsOn = true;
+    /** Keep track of current location in case Temi is already at the location */
+    private String currentLocation = null;
 
     /** Random int generator */
     private Random rand = new Random();
@@ -139,10 +141,9 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
         int imageId;
         if (volumeIsOn) {
             imageId = R.drawable.ic_baseline_volume_on_80;
-            Robot.getInstance().setVolume(VOLUME_LEVEL);
         } else {
             imageId = R.drawable.ic_baseline_volume_off_80;
-            Robot.getInstance().setVolume(0);
+            Robot.getInstance().cancelAllTtsRequests();
         }
 
         Drawable volumeIcon = ResourcesCompat.getDrawable(getResources(), imageId, null);
@@ -276,10 +277,16 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
         }
 
         // Take the user to the painting
-        Robot.getInstance().goTo(painting.getLocation());
+        String nextLocation = painting.getLocation();
+        if (!nextLocation.equals(currentLocation)) {
+            currentLocation = nextLocation;
+            Robot.getInstance().goTo(nextLocation);
+        }
 
-        Robot.getInstance().speak(TtsRequest.create(
-                getTextToSpeak(painting), false, TtsRequest.Language.EN_US));
+        if (volumeIsOn) {
+            Robot.getInstance().speak(TtsRequest.create(
+                    getTextToSpeak(painting), false, TtsRequest.Language.EN_US));
+        }
     }
 
     /**
