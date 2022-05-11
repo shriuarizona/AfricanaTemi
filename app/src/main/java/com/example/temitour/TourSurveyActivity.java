@@ -48,7 +48,6 @@ public class TourSurveyActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl(TOUR_SURVEY_URL);
 
-
         // TODO: delete all the commented stuff along with the SurveyFragment class since we are using Google Forms
 //        setContentView(R.layout.activity_survey);
 //        loadQuestionFragmentIds();

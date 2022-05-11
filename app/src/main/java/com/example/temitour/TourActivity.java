@@ -36,6 +36,7 @@ import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import com.robotemi.sdk.Robot;
 import com.robotemi.sdk.TtsRequest;
+import com.robotemi.sdk.constants.Utils;
 import com.robotemi.sdk.listeners.OnRobotReadyListener;
 
 import java.io.InputStreamReader;
@@ -79,6 +80,8 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
     private Random rand = new Random();
     /** Low volume to avoid disturbing people */
     private static final int VOLUME_LEVEL = 2;
+    /** Location of home base */
+    private static final String HOME_BASE_LOCATION = "home base";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -245,8 +248,8 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
         Painting painting = paintings[i];
         updatePaintingInfo(painting);
 
-        // TODO: need actual resources to put in 'qrCode' field of Paintings
-        // Uncomment the qrCode lines once `qrCode` in each paintings.json Painting
+        // TODO: (only if QR codes are created for each painting) need actual resources to put in 'qrCode' field of Paintings
+        // Uncomment the below qrCode lines once `qrCode` in each paintings.json Painting
         // maps to a valid QR code
 
         // Update the QR code for Hologram of curator talking about artist/painting
@@ -273,8 +276,7 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
         }
 
         // Take the user to the painting
-        // TODO: go to the location (uncomment below line)
-//         Robot.getInstance().goTo(painting.getLocation());
+        Robot.getInstance().goTo(painting.getLocation());
 
         Robot.getInstance().speak(TtsRequest.create(
                 getTextToSpeak(painting), false, TtsRequest.Language.EN_US));
@@ -404,6 +406,9 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
                     finish();
                     Intent intent = new Intent(getApplicationContext(), TourSurveyActivity.class);
                     startActivity(intent);
+
+                    // TODO: should make the Temi go back to home base AFTER they complete the survey
+                    // Robot.getInstance().goTo(HOME_BASE_LOCATION);
                 }
             });
             this.setNegativeButton("No Thanks", new DialogInterface.OnClickListener() {
@@ -412,6 +417,7 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
                     // User does not want to take the survey; quit
                     dialog.cancel();
                     finish();
+                    Robot.getInstance().goTo(HOME_BASE_LOCATION);
                 }
             });
         }
@@ -438,8 +444,6 @@ public class TourActivity extends AppCompatActivity implements OnRobotReadyListe
         public SelectPaintingDialogBuilder(@NonNull Context context) {
             super(context);
             this.setTitle("Select painting to visit");
-
-            // TODO: convert to a layout to inflate?
 
             // Create the Table of paintings
             TableLayout table = new TableLayout(context);

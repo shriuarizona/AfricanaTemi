@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.temitour">
 
-    <!-- TODO: remove TourApplication class if webscraping is not used -->
-    <!--        android:name=".TourApplication"-->
     <application
         android:allowBackup="true"
         android:icon="@drawable/app_icon"

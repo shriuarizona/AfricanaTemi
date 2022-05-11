@@ -36,34 +36,4 @@ public class ProfessorsActivity extends AppCompatActivity {
         webView.loadUrl(PROFESSORS_URL);
     }
 
-//    protected void onStart() {
-//        super.onStart();
-//
-//        // TODO: can remove this if the Events website works better
-//        // TODO: useful for understanding how to asynchonously load from HTTP request
-//        // Load the professors from Africana Studies in background
-//        TourApplication app = (TourApplication) getApplication();
-//        app.executorService.execute(() -> {
-//            try {
-//                List<AfricanaEvent> events = EventsScraper.loadEvents();
-//                runOnUiThread(() -> {
-//                    // Loaded events successfully; display them
-//                    mainLayout.removeView(eventsProgressBar);
-//                    for (AfricanaEvent event : events) {
-//                        addEvent(event);
-//                    }
-//                });
-//            } catch (IOException e) {
-//                // Failed to load events
-//                runOnUiThread(() -> {
-//                    mainLayout.removeView(eventsProgressBar);
-//                    TextView failText = new TextView(EventsActivity.this);
-//                    failText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
-//                    failText.setText(R.string.event_load_fail);
-//                    eventsContainer.addView(failText);
-//                });
-//            }
-//        });
-//    }
-
 }
